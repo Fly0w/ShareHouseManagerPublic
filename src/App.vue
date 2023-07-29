@@ -1,11 +1,93 @@
 <template>
-  <div></div>
+  <div class="h-screen w-screen">
+    <header class="px-2 py-3 h-36 text-center bg-cyan-600">
+      <h1 class="font-montserrat text-3xl font-bold text-slate-100 drop-shadow-2xl">
+        Share House Manager
+      </h1>
+      <h3 class="font-montserrat text-lg text-slate-100 drop-shadow-xl">Omotesando 1</h3>
+      <!-- Tabs -->
+      <div class="flex flex-row justify-around font-montserrat font-bold mt-2.5">
+        <div
+          class="border-2 border-emerald-200 text-slate-50 rounded-full px-4 py-2"
+          @click="tab = 'Rooms'"
+          :class="{
+            'bg-teal-400': tab === 'Rooms',
+            ' bg-transparent text-black': tab !== 'Rooms'
+          }"
+        >
+          Rooms
+        </div>
+        <div
+          class="border-2 border-purple-300 text-slate-50 rounded-full px-4 py-2"
+          @click="tab = 'Events'"
+          :class="{
+            'bg-purple-500 ': tab === 'Events',
+            ' bg-transparent text-black': tab !== 'Events'
+          }"
+        >
+          Events
+        </div>
+        <div
+          class="border-2 border-blue-300 text-slate-50 rounded-full px-4 py-2"
+          @click="tab = 'Chores'"
+          :class="{
+            'bg-blue-500 ': tab === 'Chores',
+            ' bg-transparent text-black': tab !== 'Chores'
+          }"
+        >
+          Chores
+        </div>
+        <div
+          class="border-2 border-green-300 text-slate-50 rounded-full px-4 py-2"
+          @click="tab = 'Bike'"
+          :class="{
+            'bg-green-500 ': tab === 'Bike',
+            ' bg-transparent text-black': tab !== 'Bike'
+          }"
+        >
+          Bike
+        </div>
+      </div>
+    </header>
+    <div
+      style="
+        height: calc(100vh - 9rem);
+        background-image: url('./public/bg-mobile-blue.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+      "
+      class="pt-4"
+    >
+      <AppEventPlanner v-if="tab === 'Events'" />
+      <AppGarbage v-if="tab === 'Chores'" />
+      <AppGroceries v-if="tab === 'Chores'" />
+      <AppListRooms v-if="tab === 'Rooms'" />
+      <AppBike v-if="tab === 'Bike'" />
+    </div>
+  </div>
 </template>
 
 <script>
+import AppGarbage from './components/AppGarbage.vue'
+import AppGroceries from './components/AppGroceries.vue'
+import AppListRooms from './components/AppListRooms.vue'
+import AppEventPlanner from './components/AppEventPlanner.vue'
+import AppBike from './components/AppBike.vue'
+
 export default {
-  name: 'App'
+  name: 'App',
+  data() {
+    return {
+      tab: 'Rooms'
+    }
+  },
+  components: {
+    AppEventPlanner,
+    AppGarbage,
+    AppGroceries,
+    AppListRooms,
+    AppBike
+  }
 }
 </script>
-
-<style scoped></style>
