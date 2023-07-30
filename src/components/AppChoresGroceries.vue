@@ -1,9 +1,9 @@
 <template>
-  <div>Garbage component</div>
+  <div>Groceries Component</div>
 </template>
 
 <script>
 export default {
-  name: 'AppGarbage'
+  name: 'AppChoresGroceries'
 }
 </script>

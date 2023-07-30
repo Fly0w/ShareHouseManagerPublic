@@ -1,14 +1,14 @@
 <template>
   <div class="h-screen w-screen">
     <header class="px-2 py-3 h-36 text-center bg-cyan-600">
-      <h1 class="font-montserrat text-3xl font-bold text-slate-100 drop-shadow-2xl">
+      <h1 class="font-montserrat text-3xl max-[364px]:text-2xl font-bold text-slate-100">
         Share House Manager
       </h1>
       <h3 class="font-montserrat text-lg text-slate-100 drop-shadow-xl">Omotesando 1</h3>
       <!-- Tabs -->
       <div class="flex flex-row justify-around font-montserrat font-bold mt-2.5">
         <div
-          class="border-2 border-emerald-200 text-slate-50 rounded-full px-4 py-2"
+          class="border-2 border-emerald-200 text-slate-50 rounded-full px-3 py-2"
           @click="tab = 'Rooms'"
           :class="{
             'bg-teal-400': tab === 'Rooms',
@@ -18,7 +18,7 @@
           Rooms
         </div>
         <div
-          class="border-2 border-purple-300 text-slate-50 rounded-full px-4 py-2"
+          class="border-2 border-purple-300 text-slate-50 rounded-full px-3 py-2"
           @click="tab = 'Events'"
           :class="{
             'bg-purple-500 ': tab === 'Events',
@@ -28,7 +28,7 @@
           Events
         </div>
         <div
-          class="border-2 border-blue-300 text-slate-50 rounded-full px-4 py-2"
+          class="border-2 border-blue-300 text-slate-50 rounded-full px-3 py-2"
           @click="tab = 'Chores'"
           :class="{
             'bg-blue-500 ': tab === 'Chores',
@@ -38,7 +38,7 @@
           Chores
         </div>
         <div
-          class="border-2 border-green-300 text-slate-50 rounded-full px-4 py-2"
+          class="border-2 border-green-300 text-slate-50 rounded-full px-3 py-2"
           @click="tab = 'Bike'"
           :class="{
             'bg-green-500 ': tab === 'Bike',
@@ -60,8 +60,7 @@
       class="pt-4"
     >
       <AppEventPlanner v-if="tab === 'Events'" />
-      <AppGarbage v-if="tab === 'Chores'" />
-      <AppGroceries v-if="tab === 'Chores'" />
+      <AppChores v-if="tab === 'Chores'" />
       <AppListRooms v-if="tab === 'Rooms'" />
       <AppBike v-if="tab === 'Bike'" />
     </div>
@@ -69,8 +68,7 @@
 </template>
 
 <script>
-import AppGarbage from './components/AppGarbage.vue'
-import AppGroceries from './components/AppGroceries.vue'
+import AppChores from './components/AppChores.vue'
 import AppListRooms from './components/AppListRooms.vue'
 import AppEventPlanner from './components/AppEventPlanner.vue'
 import AppBike from './components/AppBike.vue'
@@ -84,8 +82,7 @@ export default {
   },
   components: {
     AppEventPlanner,
-    AppGarbage,
-    AppGroceries,
+    AppChores,
     AppListRooms,
     AppBike
   }
