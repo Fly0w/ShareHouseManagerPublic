@@ -170,7 +170,7 @@
     }"
     style="width: 95%"
   >
-    <div class="flex flex-col w-full" v-for="day in daysWeek" :key="day">
+    <div class="flex flex-col w-full" v-for="day in daysWeek" :key="day.text">
       <AppGarbageDayWeek :day="day" :today="getDateToday" />
     </div>
   </div>
@@ -184,15 +184,20 @@ export default {
   name: 'AppChoresGarbage',
   data() {
     return {
-      daysWeek: [
-        ['Sun', 0],
-        ['Mon', 'Throw', 1],
-        ['Tue', 'Burn', 2],
-        ['Wed', 'Throw', 3],
-        ['Thu', 'Plastic', 'PET', 'Glass', 'Can', 'Cardboard', 'Throw', 4],
-        ['Fri', 'Burn', 5],
-        ['Sat', 6]
-      ],
+      daysWeek: {
+        sunday: { text: 'Sun', id: 0, icon: [], nextAction: 'Tomorrow night' },
+        monday: { text: 'Mon', id: 1, icon: ['Throw'], nextAction: 'Tonight' },
+        tuesday: { text: 'Tue', id: 2, icon: ['Burn'], nextAction: 'Tomorrow night' },
+        wednesday: { text: 'Wed', id: 3, icon: ['Throw'], nextAction: 'Tonight' },
+        thursday: {
+          text: 'Thu',
+          id: 4,
+          icon: ['Plastic', 'PET', 'Glass', 'Can', 'Cardboard', 'Throw'],
+          nextAction: 'Tonight'
+        },
+        friday: { text: 'Fri', id: 5, icon: ['Burn'], nextAction: 'Monday night' },
+        saturday: { text: 'Sat', id: 6, icon: [], nextAction: 'Monday night' }
+      },
       toggleExplanation: false
     }
   },
