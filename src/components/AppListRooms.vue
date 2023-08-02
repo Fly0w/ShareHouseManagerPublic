@@ -25,8 +25,8 @@
 
   <!-- Room list -->
   <div class="mx-5 overflow-y-auto rounded-2xl" style="height: 80%">
-    <div v-if="houseSelect === 'A house'" class="">
-      <div v-for="room in rooms.A" :key="room.roomNumber" class="flex justify-center">
+    <div v-if="houseSelect === 'A house'">
+      <div v-for="room in listRooms" :key="room.roomNumber" class="">
         <AppRoom
           :roomNumber="room.roomNumber"
           :residentName="room.residentName"
@@ -36,7 +36,7 @@
       </div>
     </div>
     <div v-else-if="houseSelect === 'B house'">
-      <div v-for="room in rooms.B" :key="room.roomNumber" class="">
+      <div v-for="room in listRooms" :key="room.roomNumber" class="">
         <AppRoom
           :roomNumber="room.roomNumber"
           :residentName="room.residentName"
@@ -51,110 +51,19 @@
 <script>
 import AppRoom from './AppRoom.vue'
 
+import useRoomsStore from '@/stores/rooms'
+import { mapState } from 'pinia'
+
 export default {
   name: 'AppListRooms',
   data() {
     return {
-      houseSelect: 'A house',
-      rooms: {
-        A: [
-          {
-            roomNumber: 'A101',
-            residentName: 'Greg',
-            residentNameKanji: '和道'
-          },
-          {
-            roomNumber: 'A102-1',
-            residentName: 'Yusei',
-            residentNameKanji: '勇成'
-          },
-          {
-            roomNumber: 'A102-2',
-            residentName: 'Florian',
-            residentNameKanji: 'フロリアン'
-          },
-          {
-            roomNumber: 'A201',
-            residentName: 'Yuta',
-            residentNameKanji: '優太'
-          },
-          {
-            roomNumber: 'A202',
-            residentName: 'Kai',
-            residentNameKanji: '海舟'
-          },
-          {
-            roomNumber: 'A203',
-            residentName: 'Maya',
-            residentNameKanji: 'マヤ'
-          },
-          {
-            roomNumber: 'A204',
-            residentName: 'Siyun',
-            residentNameKanji: 'シユン'
-          },
-          {
-            roomNumber: 'A205',
-            residentName: 'Chie',
-            residentNameKanji: ''
-          },
-          {
-            roomNumber: 'A206-1',
-            residentName: 'Mizuki',
-            residentNameKanji: 'ミズキ'
-          },
-          {
-            roomNumber: 'A206-2',
-            residentName: 'Jessica',
-            residentNameKanji: 'ジェシカ'
-          }
-        ],
-        B: [
-          {
-            roomNumber: 'B101',
-            residentName: 'Hiro',
-            residentNameKanji: '大和'
-          },
-          {
-            roomNumber: 'B102',
-            residentName: 'Rodrigo',
-            residentNameKanji: 'ロド'
-          },
-          {
-            roomNumber: 'B103',
-            residentName: 'Ricky',
-            residentNameKanji: 'リッキー'
-          },
-          {
-            roomNumber: 'B104',
-            residentName: '???',
-            residentNameKanji: '???'
-          },
-          {
-            roomNumber: 'B201',
-            residentName: 'Hanna',
-            residentNameKanji: 'ハンナ'
-          },
-          {
-            roomNumber: 'B202',
-            residentName: 'Marina',
-            residentNameKanji: 'まりな'
-          },
-          {
-            roomNumber: 'B203"',
-            residentName: 'Astrid',
-            residentNameKanji: 'アスター'
-          },
-          {
-            roomNumber: 'B204',
-            residentName: 'Haruki',
-            residentNameKanji: '春貴'
-          }
-        ]
-      }
+      houseSelect: 'A house'
     }
   },
-  methods: {},
+  computed: {
+    ...mapState(useRoomsStore, ['listRooms'])
+  },
   components: {
     AppRoom
   }

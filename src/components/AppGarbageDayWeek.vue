@@ -29,7 +29,7 @@
         class="flex flex-row justify-center items-center align-middle tracking-widest"
       >
         <p
-          class="font-montserrat capitalize italic font-bold text-center text-2xl text-sky-900"
+          class="font-montserrat capitalize italic font-bold text-center text-xl text-sky-900"
           :class="{ 'text-red-950': today === 0 }"
         >
           Team change !
@@ -50,13 +50,13 @@
 </template>
 
 <script>
-import BurnableIcon from './icons/BurnableIcon.vue'
-import CanIcon from './icons/CanIcon.vue'
-import CardboardIcon from './icons/CardboardIcon.vue'
-import GlassIcon from './icons/GlassIcon.vue'
-import PETIcon from './icons/PETIcon.vue'
-import PlasticIcon from './icons/PlasticIcon.vue'
-import ThrowAwayIcon from './icons/ThrowAwayIcon.vue'
+import BurnableIcon from './icons/garbage/BurnableIcon.vue'
+import CanIcon from './icons/garbage/CanIcon.vue'
+import CardboardIcon from './icons/garbage/CardboardIcon.vue'
+import GlassIcon from './icons/garbage/GlassIcon.vue'
+import PETIcon from './icons/garbage/PETIcon.vue'
+import PlasticIcon from './icons/garbage/PlasticIcon.vue'
+import ThrowAwayIcon from './icons/garbage/ThrowAwayIcon.vue'
 
 export default {
   name: 'AppGarbageDayWeek',
