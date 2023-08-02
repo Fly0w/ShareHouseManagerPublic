@@ -1,5 +1,5 @@
 <template>
-  <img src="../../../../public/kitchen-paper.png" alt="kitchen paper icon" />
+  <img src="/kitchen-paper.png" alt="kitchen paper icon" />
 </template>
 
 <script>

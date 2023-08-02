@@ -1,5 +1,5 @@
 <template>
-  <img src="../../../../public/tin-foil.png" alt="tin-foil img" />
+  <img src="/tin-foil.png" alt="tin-foil img" />
 </template>
 
 <script>

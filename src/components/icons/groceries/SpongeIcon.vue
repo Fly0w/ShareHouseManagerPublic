@@ -1,5 +1,5 @@
 <template>
-  <img src="../../../../public/sponge.png" alt="Sponge icon" />
+  <img src="/sponge.png" alt="Sponge icon" />
 </template>
 
 <script>

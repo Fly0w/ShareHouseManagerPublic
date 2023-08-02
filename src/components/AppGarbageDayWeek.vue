@@ -1,21 +1,28 @@
 <template>
-  <div class="flex flex-row justify-center w-full h-12 mt-3 rounded-full">
+  <div
+    class="flex flex-row justify-center w-full h-14 mt-3 rounded-full border-4"
+    :class="{
+      ' border-red-800': day.id === today,
+      ' border-sky-700': day.id !== today
+    }"
+  >
     <!-- Day -->
     <div
-      class="w-1/6 border-y-2 border-l-2 rounded-l-full text-slate-50 font-montserrat font-bold text-md"
+      class="w-1/6 h-full rounded-l-full text-slate-50 font-montserrat font-bold text-md"
       :class="{
-        'bg-red-500 border-red-800': day.id === today,
-        'bg-teal-500 border-sky-400': day.id !== today
+        'bg-red-500 ': day.id === today,
+        'bg-sky-400 ': day.id !== today
       }"
     >
-      <p class="relative text-center top-2.5">{{ day.text }}</p>
+      <p class="relative text-center top-3">{{ day.text }}</p>
     </div>
+
     <!-- Icons -->
     <div
-      class="flex flex-row justify-around w-4/6 py-1 px-3 bg-opacity-90 border-y-2"
+      class="flex flex-row justify-around w-4/6 h-full py-1 px-3 bg-opacity-90"
       :class="{
-        'bg-red-50 border-red-800': day.id === today,
-        'bg-slate-50 border-sky-400': day.id !== today
+        'bg-red-50 ': day.id === today,
+        'bg-sky-50': day.id !== today
       }"
     >
       <BurnableIcon v-if="day.icon.includes('Burn')" height="100%" />
@@ -38,10 +45,10 @@
     </div>
     <!-- Throw away icon -->
     <div
-      class="flex justify-center items-center h-12 w-1/6 px-2 border-y-2 border-r-2 rounded-r-full"
+      class="flex justify-center items-center h-full w-1/6 px-2 rounded-r-full"
       :class="{
-        'bg-red-400 border-red-800': day.id === today,
-        'bg-sky-300 border-sky-400': day.id !== today
+        'bg-red-400 ': day.id === today,
+        'bg-sky-300 0': day.id !== today
       }"
     >
       <ThrowAwayIcon v-if="day.icon.includes('Throw')" height="80%" />

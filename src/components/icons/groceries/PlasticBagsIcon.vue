@@ -1,5 +1,5 @@
 <template>
-  <img src="../../../../public/plastic-bags.png" alt="plastic bags img" />
+  <img src="/plastic-bags.png" alt="plastic bags img" />
 </template>
 
 <script>

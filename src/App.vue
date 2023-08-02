@@ -52,7 +52,7 @@
     <div
       style="
         height: calc(100vh - 9rem);
-        background-image: url('./public/bg-mobile-blue.jpg');
+        background-image: url('/bg-mobile-blue.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;

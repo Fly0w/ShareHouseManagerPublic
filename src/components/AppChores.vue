@@ -1,11 +1,36 @@
 <template>
-  <div class="">
+  <div class="w-full">
     <!-- Garbage next notification -->
-    <h2
-      class="mb-3 py-2 bg-white bg-opacity-80 text-teal-700 text-center text-lg font-montserrat font-bold"
+    <AutoScrollText
+      class="w-full py-2 mb-3 bg-white bg-opacity-80 text-teal-700 text-center text-lg font-montserrat font-bold"
     >
-      Take XXX out before tomorrow night
-    </h2>
+      <template v-slot:content>
+        <div class="flex flex-row justify-between w-full items-center h-8">
+          <p class="">Take out</p>
+          <div class="flex flex-row h-full">
+            <BurnableIcon
+              v-if="daysWeek[getDateToday].nextAction.type.includes('Burn')"
+              height="100%"
+            />
+            <CanIcon v-if="daysWeek[getDateToday].nextAction.type.includes('Can')" height="100%" />
+            <CardboardIcon
+              v-if="daysWeek[getDateToday].nextAction.type.includes('Cardboard')"
+              height="100%"
+            />
+            <GlassIcon
+              v-if="daysWeek[getDateToday].nextAction.type.includes('Glass')"
+              height="100%"
+            />
+            <PETIcon v-if="daysWeek[getDateToday].nextAction.type.includes('PET')" height="100%" />
+            <PlasticIcon
+              v-if="daysWeek[getDateToday].nextAction.type.includes('Plastic')"
+              height="100%"
+            />
+          </div>
+          <p class="">before {{ daysWeek[getDateToday].nextAction.day }}</p>
+        </div>
+      </template>
+    </AutoScrollText>
 
     <!-- Garbage/Groceries Tabs -->
     <div
@@ -35,7 +60,7 @@
 
     <!-- Display tab -->
     <div class="flex flex-col items-center">
-      <AppChoresGarbage v-if="choreTab === 'Garbage'" />
+      <AppChoresGarbage v-if="choreTab === 'Garbage'" :daysWeek="daysWeek" />
       <AppChoresGroceries v-if="choreTab === 'Groceries'" />
     </div>
   </div>
@@ -45,16 +70,89 @@
 import AppChoresGarbage from './AppChoresGarbage.vue'
 import AppChoresGroceries from './AppChoresGroceries.vue'
 
+import AutoScrollText from './utility/AutoScrollText.vue'
+
+import BurnableIcon from './icons/garbage/BurnableIcon.vue'
+import CanIcon from './icons/garbage/CanIcon.vue'
+import CardboardIcon from './icons/garbage/CardboardIcon.vue'
+import GlassIcon from './icons/garbage/GlassIcon.vue'
+import PETIcon from './icons/garbage/PETIcon.vue'
+import PlasticIcon from './icons/garbage/PlasticIcon.vue'
+
 export default {
   name: 'AppChores',
   data() {
     return {
-      choreTab: 'Garbage'
+      choreTab: 'Garbage',
+      daysWeek: [
+        {
+          text: 'Sun',
+          id: 0,
+          icon: [],
+          nextAction: { day: 'Tomorrow night', type: ['Burn'] }
+        },
+        {
+          text: 'Mon',
+          id: 1,
+          icon: ['Throw'],
+          nextAction: { day: 'Tonight', type: ['Burn'] }
+        },
+        {
+          text: 'Tue',
+          id: 2,
+          icon: ['Burn'],
+          nextAction: {
+            day: 'Tomorrow night',
+            type: ['Plastic', 'PET', 'Glass', 'Can', 'Cardboard', 'Throw']
+          }
+        },
+        {
+          text: 'Wed',
+          id: 3,
+          icon: ['Throw'],
+          nextAction: {
+            day: 'Tonight',
+            type: ['Plastic', 'PET', 'Glass', 'Can', 'Cardboard', 'Throw']
+          }
+        },
+        {
+          text: 'Thu',
+          id: 4,
+          icon: ['Plastic', 'PET', 'Glass', 'Can', 'Cardboard', 'Throw'],
+          nextAction: { day: 'Tonight', type: ['Burn'] }
+        },
+        {
+          text: 'Fri',
+          id: 5,
+          icon: ['Burn'],
+          nextAction: { day: 'Monday night', type: ['Burn'] }
+        },
+        {
+          text: 'Sat',
+          id: 6,
+          icon: [],
+          nextAction: { day: 'Monday night', type: ['Burn'] }
+        }
+      ]
+    }
+  },
+  computed: {
+    getDateToday() {
+      const today = new Date()
+      const day = today.getDay()
+      return day + 0
     }
   },
   components: {
     AppChoresGarbage,
-    AppChoresGroceries
+    AppChoresGroceries,
+    BurnableIcon,
+    CanIcon,
+    CardboardIcon,
+    GlassIcon,
+    PETIcon,
+    PlasticIcon,
+    AutoScrollText
   }
 }
 </script>

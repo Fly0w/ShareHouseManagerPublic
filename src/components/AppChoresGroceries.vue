@@ -55,7 +55,7 @@
 
   <!-- Buttons -->
   <div
-    class="flex flex-row flex-wrap justify-around w-5/6 p-2 rounded-2xl bg-sky-100 bg-opacity-60 border-emerald-400 overflow-y-auto"
+    class="flex flex-row flex-wrap justify-around w-5/6 p-2 rounded-2xl bg-sky-100 bg-opacity-60 border-2 border-teal-500 overflow-y-auto"
     :class="{
       'h-52': isScreenHeightLessThan670(),
       'h-96': isScreenHeightGreaterThanOrEqualTo670()
