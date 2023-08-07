@@ -67,6 +67,7 @@
 
 <script>
 import useRoomsStore from '@/stores/rooms'
+import useChoresStore from '@/stores/chores'
 import { mapState } from 'pinia'
 
 import RobotIcon from './icons/RobotIcon.vue'
@@ -103,38 +104,8 @@ export default {
     }
   },
   computed: {
-    getDateToday() {
-      const today = new Date()
-      const day = today.getDay()
-      return day
-    },
-    monthIDs() {
-      const now = new Date()
-      const startDate = new Date('2023-01-01')
-
-      const nowDateMonth = now.getMonth()
-      const nowDateYear = now.getYear()
-
-      const startDateMonth = startDate.getMonth()
-      const startDateYear = startDate.getYear()
-
-      const diff = (nowDateYear - startDateYear) * 12 + (nowDateMonth - startDateMonth)
-
-      //Definition of the key for the array
-      let thisMonthID = diff % 9
-      let nextMonthID = thisMonthID + 1 //For next month key
-      let lastMonthID = thisMonthID - 1 //For last month key
-      //The key can't be more than 8 or less than 0
-      if (thisMonthID === 8) {
-        nextMonthID = 0
-        lastMonthID = 7
-      } else if (thisMonthID === 0) {
-        nextMonthID = 1
-        lastMonthID = 8
-      }
-      return { lastMonthID, thisMonthID, nextMonthID }
-    },
-    ...mapState(useRoomsStore, ['listRooms', 'duoRoomsGroceries'])
+    ...mapState(useRoomsStore, ['listRooms', 'duoRoomsGroceries']),
+    ...mapState(useChoresStore, ['monthIDs', 'getDateToday'])
   },
   components: { RobotIcon, AppGroceryItemButton, AppGroceriesExplanation }
 }

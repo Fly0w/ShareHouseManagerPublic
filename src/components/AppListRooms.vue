@@ -2,21 +2,21 @@
   <!-- House Tabs -->
   <div class="mb-5 flex flex-row justify-around font-montserrat font-semibold">
     <div
-      class="px-8 py-2 border-2 rounded-full"
+      class="px-8 py-2 border-4 rounded-full"
       @click="houseSelect = 'A house'"
       :class="{
         'bg-teal-500 border-cyan-300 text-slate-50': houseSelect === 'A house',
-        'bg-white opacity-60 border-emerald-500 text-cyan-900': houseSelect === 'B house'
+        'bg-white bg-opacity-30 border-emerald-500 text-cyan-900': houseSelect === 'B house'
       }"
     >
       A House
     </div>
     <div
-      class="px-8 py-2 border-2 rounded-full"
+      class="px-8 py-2 border-4 rounded-full"
       @click="houseSelect = 'B house'"
       :class="{
-        'bg-purple-600 border-fuchsia-400 text-slate-50': houseSelect === 'B house',
-        'bg-white opacity-60 border-purple-500 text-fuchsia-900': houseSelect === 'A house'
+        'bg-purple-600 border-orange-600 text-slate-50': houseSelect === 'B house',
+        'bg-white bg-opacity-30 border-purple-600 text-purple-700': houseSelect === 'A house'
       }"
     >
       B House

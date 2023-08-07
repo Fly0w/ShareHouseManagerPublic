@@ -7,26 +7,7 @@
       <h3 class="font-montserrat text-lg text-slate-100 drop-shadow-xl">Omotesando 1</h3>
       <!-- Tabs -->
       <div class="flex flex-row justify-around font-montserrat font-bold mt-2.5">
-        <div
-          class="border-2 border-emerald-200 text-slate-50 rounded-full px-3 py-2"
-          @click="tab = 'Rooms'"
-          :class="{
-            'bg-teal-400': tab === 'Rooms',
-            ' bg-transparent text-black': tab !== 'Rooms'
-          }"
-        >
-          Rooms
-        </div>
-        <div
-          class="border-2 border-purple-300 text-slate-50 rounded-full px-3 py-2"
-          @click="tab = 'Events'"
-          :class="{
-            'bg-purple-500 ': tab === 'Events',
-            ' bg-transparent text-black': tab !== 'Events'
-          }"
-        >
-          Events
-        </div>
+        <!-- Chores -->
         <div
           class="border-2 border-blue-300 text-slate-50 rounded-full px-3 py-2"
           @click="tab = 'Chores'"
@@ -37,6 +18,29 @@
         >
           Chores
         </div>
+        <!-- Rooms -->
+        <div
+          class="border-2 border-emerald-200 text-slate-50 rounded-full px-3 py-2"
+          @click="tab = 'Rooms'"
+          :class="{
+            'bg-teal-400': tab === 'Rooms',
+            ' bg-transparent text-black': tab !== 'Rooms'
+          }"
+        >
+          Rooms
+        </div>
+        <!-- Events -->
+        <div
+          class="border-2 border-purple-300 text-slate-50 rounded-full px-3 py-2"
+          @click="tab = 'Events'"
+          :class="{
+            'bg-purple-500 ': tab === 'Events',
+            ' bg-transparent text-black': tab !== 'Events'
+          }"
+        >
+          Events
+        </div>
+        <!-- Bike -->
         <div
           class="border-2 border-green-300 text-slate-50 rounded-full px-3 py-2"
           @click="tab = 'Bike'"
@@ -77,7 +81,7 @@ export default {
   name: 'App',
   data() {
     return {
-      tab: 'Rooms'
+      tab: 'Bike'
     }
   },
   components: {

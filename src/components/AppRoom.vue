@@ -1,7 +1,7 @@
 <template>
   <div v-if="roomNumber.includes(houseSelect[0])">
     <div
-      class="w-full h-16 px-1 mb-3 flex rounded-full items-center border-4 bg-white bg-opacity-60 font-montserrat"
+      class="w-full h-16 px-1 mb-3 flex rounded-full items-center border-4 bg-white bg-opacity-70 font-montserrat"
       :class="{
         ' border-cyan-500 flex-row text-teal-700': houseSelect === 'A house',
         ' border-purple-500 flex-row-reverse text-violet-600': houseSelect === 'B house'
@@ -26,14 +26,36 @@
           {{ residentNameKanji }}
         </p>
       </div>
-      <p class="w-1/6 font-bold text-2xl text-red-500 text-center">!</p>
+
+      <ThrowAwayIcon
+        v-if="this.duoRoomsGarbage[this.weekIDs.thisWeekID].includes(this.roomNumber)"
+        class="h-4/6 mx-1 font-bold text-2xl text-red-500 text-center"
+      />
+
+      <GroceriesIcon
+        v-if="this.duoRoomsGroceries[this.monthIDs.thisMonthID].includes(this.roomNumber)"
+        class="h-4/6 mx-1 font-bold text-2xl text-green-500 text-center"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import useRoomsStore from '@/stores/rooms'
+import useChoresStore from '@/stores/chores'
+
+import GroceriesIcon from './icons/groceries/GroceriesIcon.vue'
+import ThrowAwayIcon from './icons/garbage/ThrowAwayIcon.vue'
+
+import { mapState } from 'pinia'
+
 export default {
   name: 'AppRoom',
-  props: ['roomNumber', 'residentName', 'residentNameKanji', 'houseSelect']
+  computed: {
+    ...mapState(useRoomsStore, ['duoRoomsGarbage', 'duoRoomsGroceries']),
+    ...mapState(useChoresStore, ['weekIDs', 'monthIDs'])
+  },
+  props: ['roomNumber', 'residentName', 'residentNameKanji', 'houseSelect'],
+  components: { GroceriesIcon, ThrowAwayIcon }
 }
 </script>

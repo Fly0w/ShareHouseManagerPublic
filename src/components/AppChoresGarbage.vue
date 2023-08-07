@@ -74,6 +74,7 @@ import AppGarbageExplanation from './AppGarbageExplanation.vue'
 import RobotIcon from './icons/RobotIcon.vue'
 
 import useRoomsStore from '@/stores/rooms'
+import useChoresStore from '@/stores/chores'
 import { mapState } from 'pinia'
 
 export default {
@@ -95,42 +96,8 @@ export default {
     }
   },
   computed: {
-    getDateToday() {
-      const today = new Date()
-      const day = today.getDay()
-      return day
-    },
-    weekIDs() {
-      const now = new Date()
-      const startDateMs = Date.parse('January 1, 2023')
-      const nowDateMs = now.getTime()
-      // const nowDateMs = Date.parse("January 8, 2023");
-      let difDateMs = nowDateMs - startDateMs //Number of ms between January 1st 2023 and now
-      const weekMs = 1000 * 60 * 60 * 24 * 7
-      const difDateWeek = Math.floor(difDateMs / weekMs) //Number of weeks since Sunday 1st of January 2023
-
-      //Definition of the key for the array
-      let offset = 1
-      let thisWeekID = (difDateWeek % 9) + offset
-
-      let nextWeekID = thisWeekID + 1 //For next week key
-      let lastWeekID = thisWeekID - 1 //For last week key
-
-      //The key can't be more than 8 or less than 0
-      if (thisWeekID >= 9) {
-        thisWeekID = 0
-      }
-
-      if (thisWeekID === 8) {
-        nextWeekID = 0
-        lastWeekID = 7
-      } else if (thisWeekID === 0) {
-        nextWeekID = 1
-        lastWeekID = 8
-      }
-      return { lastWeekID, thisWeekID, nextWeekID }
-    },
-    ...mapState(useRoomsStore, ['listRooms', 'duoRoomsGarbage'])
+    ...mapState(useRoomsStore, ['listRooms', 'duoRoomsGarbage']),
+    ...mapState(useChoresStore, ['weekIDs', 'getDateToday'])
   },
   components: { AppGarbageDayWeek, AppGarbageExplanation, RobotIcon },
   props: ['daysWeek']
