@@ -1,10 +1,14 @@
 <template>
   <div class="flex flex-col items-center h-full w-full pb-3 font-montserrat text-center">
     <!-- Title -->
-    <div class="flex flex-col items-center w-full py-2 bg-green-200 bg-opacity-90">
+    <div
+      class="flex flex-col items-center w-full py-2 bg-green-200 bg-opacity-90"
+      style="height: 10%"
+    >
       <h2 class="text-3xl tracking-widest italic text-green-700 font-bold">Omote-bike</h2>
       <p class="text-lg" v-if="isBikeUsed">
         <span class="text-red-700 font-bold text-xl">{{ currentBikeUser }}</span> is using the bike
+        now
       </p>
       <p class="text-lg" v-else>Nobody is using the bike</p>
     </div>
