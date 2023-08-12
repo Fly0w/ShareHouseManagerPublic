@@ -61,7 +61,7 @@
         background-position: center;
         background-repeat: no-repeat;
       "
-      class="pt-4"
+      class=""
     >
       <AppEventPlanner v-if="tab === 'Events'" />
       <AppChores v-if="tab === 'Chores'" />
@@ -81,7 +81,7 @@ export default {
   name: 'App',
   data() {
     return {
-      tab: 'Bike'
+      tab: 'Events'
     }
   },
   components: {

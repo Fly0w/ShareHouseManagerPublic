@@ -1,6 +1,6 @@
 <template>
   <!-- House Tabs -->
-  <div class="mb-5 flex flex-row justify-around font-montserrat font-semibold">
+  <div class="pt-3 mb-5 flex flex-row justify-around font-montserrat font-semibold">
     <div
       class="px-8 py-2 border-4 rounded-full"
       @click="houseSelect = 'A house'"
