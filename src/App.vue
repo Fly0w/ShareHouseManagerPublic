@@ -81,7 +81,7 @@ export default {
   name: 'App',
   data() {
     return {
-      tab: 'Events'
+      tab: 'Bike'
     }
   },
   components: {
