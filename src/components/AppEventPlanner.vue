@@ -2,14 +2,32 @@
   <div class="w-full h-full font-montserrat">
     <!-- Title -->
     <div
-      class="flex flex-col justify-center w-full py-3 text-center bg-fuchsia-500/95"
+      class="flex flex-col justify-center w-full py-3 text-center"
+      :class="{ 'bg-fuchsia-500/95': !toggleNewEvent, 'bg-yellow-500/95': toggleNewEvent }"
       style="height: 10%"
     >
-      <h2 class="text-white text-3xl italic tracking-widest">Upcoming events</h2>
+      <h2 v-if="!toggleNewEvent" class="text-white text-3xl italic tracking-widest">
+        Upcoming events
+      </h2>
+      <h2 v-else class="text-white text-3xl italic tracking-widest">New Event ?</h2>
+      <button
+        class="absolute right-3 top-48 flex flex-col justify-center items-center h-12 w-12 border-2 text-4xl font-bolder rounded-full"
+        :class="{
+          'bg-emerald-500 border-emerald-800 text-white': !toggleNewEvent,
+          'bg-slate-400 border-white text-white': toggleNewEvent
+        }"
+        @click.prevent="toggleNewEvent = !toggleNewEvent"
+      >
+        <p v-if="!toggleNewEvent" class="relative">+</p>
+        <p v-else class="relative font-bold">⬅</p>
+      </button>
     </div>
 
+    <div class="w-full" v-if="toggleNewEvent" style="height: 90%">
+      <EventNewForm />
+    </div>
     <!--List of Events -->
-    <div class="w-full overflow-y-auto" style="height: 90%">
+    <div v-else class="w-full overflow-y-auto" style="height: 90%">
       <div class="w-full" v-for="event in events" :key="event.id">
         <EventCard :event="event" />
       </div>
@@ -19,11 +37,13 @@
 
 <script>
 import EventCard from './EventCard.vue'
+import EventNewForm from './EventNewForm.vue'
 
 export default {
   name: 'AppEventPlanner',
   data() {
     return {
+      toggleNewEvent: false,
       events: [
         {
           id: '0001',
@@ -86,6 +106,6 @@ export default {
       ]
     }
   },
-  components: { EventCard }
+  components: { EventCard, EventNewForm }
 }
 </script>
