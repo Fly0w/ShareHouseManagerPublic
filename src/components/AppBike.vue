@@ -1,7 +1,10 @@
 <template>
   <div class="flex flex-col items-center h-full w-full pb-3 font-montserrat text-center">
     <!-- Title -->
-    <div class="flex flex-col items-center w-full py-2 bg-green-200/95" style="height: 10%">
+    <div
+      class="flex flex-col items-center justify-center w-full py-2 bg-green-200/95"
+      style="height: 10%"
+    >
       <h2 class="text-3xl tracking-widest italic text-green-700 font-bold">Omote-bike</h2>
       <p class="text-xl" v-if="bikeStore.isBikeUsed">
         <span class="text-red-700 font-bold text-2xl">{{ bikeStore.currentBikeUser }}</span> is

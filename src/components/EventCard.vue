@@ -1,6 +1,29 @@
 <template>
   <div
-    class="h-full w-full"
+    v-if="triggerConfirmDelete"
+    class="flex flex-col justify-around items-center w-full h-44 px-1 py-1 border-t-2 bg-red-600/90 border-red-700"
+  >
+    <p class="text-white text-2xl text-center">Are you sure you want to delete this event ?</p>
+    <p class="w-full text-center text-2xl font-bold text-white">{{ event.title }}</p>
+    <div class="">
+      <button
+        class="px-3 mx-4 rounded-lg border-2 border-slate-100 bg-red-700 text-white text-xl"
+        @click="deleteEvent"
+      >
+        Delete event
+      </button>
+      <button
+        class="px-3 mx-4 rounded-lg border-2 border-slate-100 bg-slate-500 text-white text-xl"
+        @click="triggerConfirmDelete = !triggerConfirmDelete"
+      >
+        Keep event
+      </button>
+    </div>
+  </div>
+
+  <div
+    v-if="!triggerConfirmDelete"
+    class=""
     style="
       background-image: url('../../public/event-bg.jpg');
       background-repeat: no-repeat;
@@ -8,8 +31,19 @@
       background-position: center;
     "
   >
-    <div class="flex flex-col w-full h-44 px-1 py-1 border-t-2 bg-slate-100/80 border-violet-700">
-      <p class="h-1/6 w-full text-center text-xl font-bold text-purple-900">{{ event.title }}</p>
+    <div class="flex flex-col w-full h-44 px-1 py-1 border-t-2 bg-slate-100/90 border-violet-700">
+      <div class="relative w-full h-full">
+        <div class="absolute top-1 left-2">
+          <button class="text-green-500 mx-3" @click="toggleEdit()">
+            <EditIcon class="h-6 w-6" />
+          </button>
+          <button class="text-red-500 mx-3" @click="triggerConfirmDelete = !triggerConfirmDelete">
+            <DeleteIcon class="h-6 w-6" />
+          </button>
+        </div>
+
+        <p class="h-1/6 w-full text-center text-xl font-bold text-purple-900">{{ event.title }}</p>
+      </div>
 
       <div class="flex flex-row w-full h-5/6 justify-around items-center">
         <!-- Left Panel -->
@@ -55,10 +89,22 @@ import DateIcon from './icons/events/DateIcon.vue'
 import PlaceIcon from './icons/events/PlaceIcon.vue'
 import LinkIcon from './icons/events/LinkIcon.vue'
 import UserIcon from './icons/events/UserIcon.vue'
+import EditIcon from './icons/events/EditIcon.vue'
+import DeleteIcon from './icons/events/DeleteIcon.vue'
 
 export default {
   name: 'EventCard',
-  props: ['event'],
-  components: { DateIcon, PlaceIcon, LinkIcon, UserIcon }
+  data() {
+    return {
+      triggerConfirmDelete: false
+    }
+  },
+  methods: {
+    deleteEvent() {
+      console.log('deleting event', this.event.id)
+    }
+  },
+  props: ['event', 'toggleEdit'],
+  components: { DateIcon, PlaceIcon, LinkIcon, UserIcon, EditIcon, DeleteIcon }
 }
 </script>
