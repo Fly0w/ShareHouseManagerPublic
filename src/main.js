@@ -1,11 +1,17 @@
 import './assets/base.css'
-
+import { auth } from './includes/firebase'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 
-const app = createApp(App)
+let app
 
-app.use(createPinia())
+auth.onAuthStateChanged(() => {
+  if (!app) {
+    app = createApp(App)
 
-app.mount('#app')
+    app.use(createPinia())
+
+    app.mount('#app')
+  }
+})

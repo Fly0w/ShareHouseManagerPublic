@@ -25,7 +25,7 @@
     v-if="!triggerConfirmDelete"
     class=""
     style="
-      background-image: url('../../public/event-bg.jpg');
+      background-image: url('/event-bg-min.png');
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;

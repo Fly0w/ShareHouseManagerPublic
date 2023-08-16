@@ -6,7 +6,7 @@
       </h1>
       <h3 class="font-montserrat text-lg text-slate-100 drop-shadow-xl">Omotesando 1</h3>
       <!-- Tabs -->
-      <div class="flex flex-row justify-around font-montserrat font-bold mt-2.5">
+      <div v-if="isConnected" class="flex flex-row justify-around font-montserrat font-bold mt-2.5">
         <!-- Chores -->
         <div
           class="border-2 border-blue-300 text-slate-50 rounded-full px-3 py-2"
@@ -52,6 +52,12 @@
           Bike
         </div>
       </div>
+      <h2
+        v-else
+        class="w-full px-3 bg-white/80 border-2 border-red-700 rounded-md text-red-600 text-lg font-montserrat"
+      >
+        This is a private website. To access it, please login first.
+      </h2>
     </header>
     <div
       style="
@@ -63,10 +69,15 @@
       "
       class=""
     >
-      <AppEventPlanner v-if="tab === 'Events'" />
-      <AppChores v-if="tab === 'Chores'" />
-      <AppListRooms v-if="tab === 'Rooms'" />
-      <AppBike v-if="tab === 'Bike'" />
+      <div v-if="isConnected" class="w-full h-full">
+        <AppEventPlanner v-if="tab === 'Events'" />
+        <AppChores v-if="tab === 'Chores'" />
+        <AppListRooms v-if="tab === 'Rooms'" />
+        <AppBike v-if="tab === 'Bike'" />
+      </div>
+      <div v-else class="w-full" style="height: calc(100vh - 9rem)">
+        <LoginForm />
+      </div>
     </div>
   </div>
 </template>
@@ -76,19 +87,36 @@ import AppChores from './components/AppChores.vue'
 import AppListRooms from './components/AppListRooms.vue'
 import AppEventPlanner from './components/AppEventPlanner.vue'
 import AppBike from './components/AppBike.vue'
+import LoginForm from './components/LoginForm.vue'
+
+import useRoomsStore from '@/stores/rooms'
+import { mapWritableState } from 'pinia'
+
+import { auth } from './includes/firebase'
 
 export default {
   name: 'App',
   data() {
     return {
-      tab: 'Events'
+      tab: 'Chores',
+      loginStatus: false,
+      loggedUser: ''
+    }
+  },
+  created() {
+    if (auth.currentUser) {
+      this.isConnected = true
     }
   },
   components: {
     AppEventPlanner,
     AppChores,
     AppListRooms,
-    AppBike
+    AppBike,
+    LoginForm
+  },
+  computed: {
+    ...mapWritableState(useRoomsStore, ['isConnected'])
   }
 }
 </script>
