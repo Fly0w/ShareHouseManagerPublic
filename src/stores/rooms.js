@@ -7,73 +7,73 @@ export default defineStore('rooms', {
         roomNumber: 'A101',
         residentName: 'Gregory',
         residentNameKanji: '和道',
-        roomPassword: 'A101password',
         roomEmail: 'A101@hotmail.com',
-        roomEmoji: '🐸'
+        roomEmoji: '🐸',
+        roomEvents: []
       },
       A1021: {
         roomNumber: 'A102-1',
         residentName: 'Yusei',
         residentNameKanji: '勇成',
-        roomPassword: 'A1021password',
         roomEmail: 'A1021@hotmail.com',
-        roomEmoji: '🦅'
+        roomEmoji: '🦅',
+        roomEvents: []
       },
       A1022: {
         roomNumber: 'A102-2',
         residentName: 'Florian',
         residentNameKanji: 'フロリアン',
-        roomPassword: 'A1022password',
         roomEmail: 'A1022@hotmail.com',
-        roomEmoji: '🦊'
+        roomEmoji: '🦊',
+        roomEvents: []
       },
       A201: {
         roomNumber: 'A201',
         residentName: 'Yuta',
         residentNameKanji: '優太',
-        roomPassword: 'A201password',
         roomEmail: 'A201@hotmail.com',
-        roomEmoji: '🐺'
+        roomEmoji: '🐺',
+        roomEvents: []
       },
       A202: {
         roomNumber: 'A202',
         residentName: 'Kai',
         residentNameKanji: '海舟',
-        roomPassword: 'A202password',
         roomEmail: 'A202@hotmail.com',
-        roomEmoji: '🐮'
+        roomEmoji: '🐮',
+        roomEvents: []
       },
       A203: {
         roomNumber: 'A203',
         residentName: 'Maya',
         residentNameKanji: 'マヤ',
-        roomPassword: 'A203password',
         roomEmail: 'A203@hotmail.com',
-        roomEmoji: '🐎'
+        roomEmoji: '🐎',
+        roomEvents: []
       },
       A204: {
         roomNumber: 'A204',
         residentName: 'Siyun',
         residentNameKanji: 'シユン',
-        roomPassword: 'A204password',
         roomEmail: 'A204@hotmail.com',
-        roomEmoji: '🦓'
+        roomEmoji: '🦓',
+        roomEvents: []
       },
       A205: {
         roomNumber: 'A205',
         residentName: 'Chie',
         residentNameKanji: '',
-        roomPassword: 'A205password',
         roomEmail: 'A205@hotmail.com',
-        roomEmoji: '🦄'
+        roomEmoji: '🦄',
+        roomEvents: []
       },
       A2061: {
         roomNumber: 'A206-1',
         residentName: 'Mizuki',
         residentNameKanji: 'ミズキ',
-        roomPassword: 'A2061password',
         roomEmail: 'A2061@hotmail.com',
-        roomEmoji: '🦒'
+        roomEmoji: '🦒',
+        roomEvents: []
       },
       A2062: {
         roomNumber: 'A206-2',
@@ -81,71 +81,72 @@ export default defineStore('rooms', {
         residentNameKanji: 'ジェシカ',
         roomPassword: 'A2062password',
         roomEmail: 'A2062@hotmail.com',
-        roomEmoji: '🐼'
+        roomEmoji: '🐼',
+        roomEvents: []
       },
       B101: {
         roomNumber: 'B101',
         residentName: 'Hiro',
         residentNameKanji: '大和',
-        roomPassword: 'B101password',
         roomEmail: 'B101@hotmail.com',
-        roomEmoji: '🦔'
+        roomEmoji: '🦔',
+        roomEvents: []
       },
       B102: {
         roomNumber: 'B102',
         residentName: 'Rodrigo',
         residentNameKanji: 'ロド',
-        roomPassword: 'B102password',
         roomEmail: 'B102@hotmail.com',
-        roomEmoji: '🐭'
+        roomEmoji: '🐭',
+        roomEvents: []
       },
       B103: {
         roomNumber: 'B103',
         residentName: 'Ricky',
         residentNameKanji: 'リッキー',
-        roomPassword: 'B103password',
         roomEmail: 'B103@hotmail.com',
-        roomEmoji: '🦘'
+        roomEmoji: '🦘',
+        roomEvents: []
       },
       B104: {
         roomNumber: 'B104',
         residentName: '???',
         residentNameKanji: '???',
-        roomPassword: 'B104password',
         roomEmail: 'B104@hotmail.com',
-        roomEmoji: '🐰'
+        roomEmoji: '🐰',
+        roomEvents: []
       },
       B201: {
         roomNumber: 'B201',
         residentName: 'Hanna',
         residentNameKanji: 'ハンナ',
-        roomPassword: 'B201password',
         roomEmail: 'B201@hotmail.com',
-        roomEmoji: '🦉'
+        roomEmoji: '🦉',
+        roomEvents: []
       },
       B202: {
         roomNumber: 'B202',
         residentName: 'Marina',
         residentNameKanji: 'まりな',
-        roomPassword: 'B202password',
         roomEmail: 'B202@hotmail.com',
-        roomEmoji: '🐬'
+        roomEmoji: '🐬',
+        roomEvents: []
       },
       B203: {
         roomNumber: 'B203',
         residentName: 'Astrid',
         residentNameKanji: 'アスター',
-        roomPassword: 'B203password',
         roomEmail: 'B203@hotmail.com',
-        roomEmoji: '🐶'
+        roomEmoji: '🐶',
+        roomEvents: []
       },
       B204: {
         roomNumber: 'B204',
         residentName: 'Haruki',
         residentNameKanji: '春貴',
-        roomPassword: 'B204password',
         roomEmail: 'B204@hotmail.com',
-        roomEmoji: '🐨'
+        roomEmoji: '🐨',
+        roomEvents: []
       }
     },
     duoRoomsGarbage: [
@@ -169,7 +170,6 @@ export default defineStore('rooms', {
       ['A1022', 'B103'],
       ['A201', 'B104'],
       ['A202', 'B201']
-    ],
-    isConnected: false
+    ]
   })
 })

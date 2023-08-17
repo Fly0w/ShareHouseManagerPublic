@@ -21,17 +21,12 @@
     </div>
   </div>
 
-  <div
-    v-if="!triggerConfirmDelete"
-    class=""
-    style="
-      background-image: url('/event-bg-min.png');
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-    "
-  >
-    <div class="flex flex-col w-full h-44 px-1 py-1 border-t-2 bg-slate-100/90 border-violet-700">
+  <div class="relative w-full h-full">
+    <img v-if="!triggerConfirmDelete" src="/event-bg-min.png" class="absolute -z-5 w-full h-full" />
+    <div
+      v-if="!triggerConfirmDelete"
+      class="relative z-5 flex flex-col w-full h-44 px-1 py-1 border-t-2 bg-slate-100/90 border-violet-700"
+    >
       <div class="relative w-full h-full">
         <div class="absolute top-1 left-2">
           <button class="text-green-500 mx-3" @click="toggleEdit()">

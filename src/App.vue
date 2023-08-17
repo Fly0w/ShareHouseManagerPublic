@@ -69,14 +69,14 @@
       "
       class=""
     >
-      <div v-if="isConnected" class="w-full h-full">
+      <div v-if="!isConnected" class="w-full" style="height: calc(100vh - 9rem)">
+        <LoginForm />
+      </div>
+      <div v-else class="w-full h-full">
         <AppEventPlanner v-if="tab === 'Events'" />
         <AppChores v-if="tab === 'Chores'" />
         <AppListRooms v-if="tab === 'Rooms'" />
         <AppBike v-if="tab === 'Bike'" />
-      </div>
-      <div v-else class="w-full" style="height: calc(100vh - 9rem)">
-        <LoginForm />
       </div>
     </div>
   </div>
@@ -89,8 +89,8 @@ import AppEventPlanner from './components/AppEventPlanner.vue'
 import AppBike from './components/AppBike.vue'
 import LoginForm from './components/LoginForm.vue'
 
-import useRoomsStore from '@/stores/rooms'
-import { mapWritableState } from 'pinia'
+import useAuthenticationStore from '@/stores/authentication'
+import { mapWritableState, mapActions } from 'pinia'
 
 import { auth } from './includes/firebase'
 
@@ -99,14 +99,29 @@ export default {
   data() {
     return {
       tab: 'Chores',
-      loginStatus: false,
       loggedUser: ''
     }
   },
   created() {
     if (auth.currentUser) {
+      // Keep the user connected and gets his information to save it in the store if he's connected
+      const roomNumber = auth.currentUser._delegate.email.split('@')[0].toUpperCase()
+      this.getUserData(roomNumber)
       this.isConnected = true
+    } else {
+      // If not connected, reset the store
+      this.isConnected = false
+      this.userData = {
+        roomNumber: '',
+        residentName: '',
+        residentNameKanji: '',
+        roomEmoji: '',
+        roomEvents: []
+      }
     }
+  },
+  methods: {
+    ...mapActions(useAuthenticationStore, ['getUserData'])
   },
   components: {
     AppEventPlanner,
@@ -116,7 +131,7 @@ export default {
     LoginForm
   },
   computed: {
-    ...mapWritableState(useRoomsStore, ['isConnected'])
+    ...mapWritableState(useAuthenticationStore, ['isConnected', 'userData'])
   }
 }
 </script>

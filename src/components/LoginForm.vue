@@ -71,9 +71,8 @@
 
 <script>
 import useRoomsStore from '@/stores/rooms'
-import { mapState, mapWritableState } from 'pinia'
-import { auth, db, usersCollection } from '../includes/firebase'
-import { doc, getDoc } from 'firebase/firestore'
+import useAuthenticationStore from '@/stores/authentication'
+import { mapState, mapWritableState, mapActions } from 'pinia'
 
 export default {
   name: 'LoginForm',
@@ -90,71 +89,39 @@ export default {
     }
   },
   methods: {
+    ...mapActions(useAuthenticationStore, ['sendLoginDB', 'getUserData']),
     async sendLogin() {
       this.loginTabTrigger = false
       this.sendingLoginInfo = true
       this.infoMsg = 'Checking user credentials'
       this.credentialsCheck = 'checking'
 
-      const docRef = doc(db, 'users', this.selectedRoom)
-      const docSnap = await getDoc(docRef)
+      const login = this.sendLoginDB(
+        this.listRooms,
+        this.selectedRoom,
+        this.loginResidentName,
+        this.loginRoomPassword
+      )
 
-      if (docSnap.data().residentName === this.loginResidentName) {
-        try {
-          await auth.signInWithEmailAndPassword(docSnap.data().roomEmail, this.loginRoomPassword)
-          console.log('NICEEEEE')
-          this.credentialsCheck = 'good'
-          this.loginTabTrigger = true
-          this.infoMsg = 'You are successfully logged in !'
-          setTimeout(() => {
-            this.isConnected = true
-          }, 1500)
-          return
-        } catch (error) {
-          console.log(error)
-          this.credentialsCheck = 'error'
-          this.loginTabTrigger = true
-          this.infoMsg = 'Something went wrong, try again'
-          setTimeout(() => {
-            this.sendingLoginInfo = false
-          }, 800)
-          return
-        }
-      } else {
-        this.credentialsCheck = 'error'
+      if ((await login) === true) {
         this.loginTabTrigger = true
+        this.credentialsCheck = 'good'
+        this.infoMsg = 'You are successfully logged in !'
+        this.getUserData(this.selectedRoom)
+      } else {
+        this.loginTabTrigger = true
+        this.credentialsCheck = 'error'
         this.infoMsg = 'Something went wrong, try again'
         setTimeout(() => {
           this.sendingLoginInfo = false
         }, 800)
       }
-    },
-    async createAuthAndFirestore() {
-      // Used to initialize all the entries in the db, do not use
-      try {
-        for (let i = 0; i <= 17; i++) {
-          await auth.createUserWithEmailAndPassword(
-            this.listRooms[Object.keys(this.listRooms)[i]].roomEmail,
-            this.listRooms[Object.keys(this.listRooms)[i]].roomPassword
-          )
-          await usersCollection.doc(Object.keys(this.listRooms)[i]).set({
-            roomNumber: this.listRooms[Object.keys(this.listRooms)[i]].roomNumber,
-            residentName: this.listRooms[Object.keys(this.listRooms)[i]].residentName,
-            residentNameKanji: this.listRooms[Object.keys(this.listRooms)[i]].residentNameKanji,
-            roomEmail: this.listRooms[Object.keys(this.listRooms)[i]].roomEmail,
-            roomEmoji: this.listRooms[Object.keys(this.listRooms)[i]].roomEmoji
-          })
-        }
-
-        console.log('ok')
-      } catch (error) {
-        console.log(error)
-      }
     }
   },
+
   computed: {
     ...mapState(useRoomsStore, ['listRooms']),
-    ...mapWritableState(useRoomsStore, ['isConnected'])
+    ...mapWritableState(useAuthenticationStore, ['isConnected'])
   }
 }
 </script>
