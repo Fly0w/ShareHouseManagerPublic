@@ -144,6 +144,7 @@ import LoginForm from './components/LoginForm.vue'
 import ProfileOverlay from './components/ProfileOverlay.vue'
 
 import useAuthenticationStore from '@/stores/authentication'
+import useRoomsStore from '@/stores/rooms'
 import { mapWritableState, mapActions } from 'pinia'
 
 import { auth } from './includes/firebase'
@@ -163,6 +164,7 @@ export default {
       // Keep the user connected and gets his information to save it in the store if he's connected
       const roomNumber = auth.currentUser._delegate.email.split('@')[0].toUpperCase()
       this.getUserData(roomNumber)
+      this.getAllRooms()
       this.isConnected = true
     } else {
       // If not connected, reset the store
@@ -178,6 +180,7 @@ export default {
   },
   methods: {
     ...mapActions(useAuthenticationStore, ['getUserData', 'logOut']),
+    ...mapActions(useRoomsStore, ['getAllRooms']),
     loggingUserOut() {
       this.logoutBtnMsg = '...'
       setTimeout(() => {
