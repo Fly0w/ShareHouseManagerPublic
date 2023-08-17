@@ -102,24 +102,24 @@ export default {
       loggedUser: ''
     }
   },
-  created() {
-    if (auth.currentUser) {
-      // Keep the user connected and gets his information to save it in the store if he's connected
-      const roomNumber = auth.currentUser._delegate.email.split('@')[0].toUpperCase()
-      this.getUserData(roomNumber)
-      this.isConnected = true
-    } else {
-      // If not connected, reset the store
-      this.isConnected = false
-      this.userData = {
-        roomNumber: '',
-        residentName: '',
-        residentNameKanji: '',
-        roomEmoji: '',
-        roomEvents: []
-      }
-    }
-  },
+  // created() {
+  //   if (auth.currentUser) {
+  //     // Keep the user connected and gets his information to save it in the store if he's connected
+  //     const roomNumber = auth.currentUser._delegate.email.split('@')[0].toUpperCase()
+  //     this.getUserData(roomNumber)
+  //     this.isConnected = true
+  //   } else {
+  //     // If not connected, reset the store
+  //     this.isConnected = false
+  //     this.userData = {
+  //       roomNumber: '',
+  //       residentName: '',
+  //       residentNameKanji: '',
+  //       roomEmoji: '',
+  //       roomEvents: []
+  //     }
+  //   }
+  // },
   methods: {
     ...mapActions(useAuthenticationStore, ['getUserData'])
   },

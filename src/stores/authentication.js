@@ -4,7 +4,7 @@ import { doc, getDoc } from 'firebase/firestore'
 
 export default defineStore('authentication', {
   state: () => ({
-    isConnected: false,
+    isConnected: true,
     userData: {
       roomNumber: '',
       residentName: '',
