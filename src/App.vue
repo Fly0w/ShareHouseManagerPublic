@@ -41,9 +41,9 @@
           <p
             v-if="userTabTrigger"
             class="absolute -bottom-11 px-3 py-0.5 text-center border-2 border-emerald-700 bg-sky-400 text-slate-100 font-bold rounded-full active:translate-y-1"
-            @click="(userTabTrigger = false), logOut()"
+            @click="loggingUserOut()"
           >
-            Logout
+            {{ logoutBtnMsg }}
           </p>
         </div>
       </div>
@@ -154,7 +154,8 @@ export default {
     return {
       tab: 'Chores',
       loggedUser: '',
-      userTabTrigger: false
+      userTabTrigger: false,
+      logoutBtnMsg: 'Logout'
     }
   },
   created() {
@@ -176,7 +177,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useAuthenticationStore, ['getUserData', 'logOut'])
+    ...mapActions(useAuthenticationStore, ['getUserData', 'logOut']),
+    loggingUserOut() {
+      this.logoutBtnMsg = '...'
+      setTimeout(() => {
+        this.userTabTrigger = false
+        this.logOut()
+        this.logoutBtnMsg = 'Logout'
+      }, 1500)
+    }
   },
   components: {
     AppEventPlanner,
