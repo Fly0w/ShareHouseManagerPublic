@@ -56,10 +56,6 @@
   <!-- Timetable -->
   <div
     class="flex flex-col items-center px-3 py-2 mx-2 border-2 border-sky-400 rounded-3xl bg-slate-50 bg-opacity-30 overflow-y-auto"
-    :class="{
-      'h-52': isScreenHeightLessThan670(),
-      'h-96': isScreenHeightGreaterThanOrEqualTo670()
-    }"
     style="width: 95%"
   >
     <div class="flex flex-col w-full" v-for="day in daysWeek" :key="day.text">
@@ -85,12 +81,6 @@ export default {
     }
   },
   methods: {
-    isScreenHeightLessThan670() {
-      return window.innerHeight < 670
-    },
-    isScreenHeightGreaterThanOrEqualTo670() {
-      return window.innerHeight >= 670
-    },
     closeTabExp() {
       this.toggleExplanation = false
     }

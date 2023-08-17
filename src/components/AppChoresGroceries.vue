@@ -56,10 +56,6 @@
   <!-- Buttons -->
   <div
     class="flex flex-row flex-wrap justify-around w-5/6 p-2 rounded-2xl bg-sky-100 bg-opacity-60 border-2 border-teal-500 overflow-y-auto"
-    :class="{
-      'h-52': isScreenHeightLessThan670(),
-      'h-96': isScreenHeightGreaterThanOrEqualTo670()
-    }"
   >
     <AppGroceryItemButton v-for="category in categories" :key="category" :category="category" />
   </div>
@@ -93,12 +89,6 @@ export default {
     }
   },
   methods: {
-    isScreenHeightLessThan670() {
-      return window.innerHeight < 670
-    },
-    isScreenHeightGreaterThanOrEqualTo670() {
-      return window.innerHeight >= 670
-    },
     closeTabExp() {
       this.toggleExplanation = false
     }

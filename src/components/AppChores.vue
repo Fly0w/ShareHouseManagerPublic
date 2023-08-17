@@ -1,11 +1,12 @@
 <template>
-  <div class="w-full">
+  <div class="w-full h-full">
     <!-- Garbage next notification -->
     <AutoScrollText
-      class="w-full py-2 mb-3 bg-white bg-opacity-80 text-teal-700 text-center text-lg font-montserrat font-bold"
+      class="flex flex-col justify-center w-full mb-3 bg-white bg-opacity-80 text-teal-700 text-center text-lg font-montserrat font-bold"
+      style="height: 9%"
     >
       <template v-slot:content>
-        <div class="flex flex-row justify-between w-full items-center h-8">
+        <div class="h-full flex flex-row justify-between w-full items-center">
           <p class="">Take out</p>
           <div class="flex flex-row h-full">
             <BurnableIcon
@@ -35,9 +36,10 @@
     <!-- Garbage/Groceries Tabs -->
     <div
       class="flex flex-row mx-5 justify-center text-center text-lg font-montserrat font-bold border-2 border-sky-800 rounded-full"
+      style="height: 7%"
     >
       <div
-        class="px-8 py-2 w-3/6 rounded-l-full"
+        class="flex flex-col justify-center px-8 py-2 w-3/6 rounded-l-full"
         @click="choreTab = 'Garbage'"
         :class="{
           'bg-sky-500 text-slate-50': choreTab === 'Garbage',
@@ -47,7 +49,7 @@
         Garbage
       </div>
       <div
-        class="px-8 py-2 w-3/6 rounded-r-full"
+        class="flex flex-col justify-center px-8 py-2 w-3/6 rounded-r-full"
         @click="choreTab = 'Groceries'"
         :class="{
           'bg-emerald-500 text-slate-50': choreTab === 'Groceries',
@@ -59,7 +61,7 @@
     </div>
 
     <!-- Display tab -->
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center overflow-y-auto" style="height: 80%">
       <AppChoresGarbage v-if="choreTab === 'Garbage'" :daysWeek="daysWeek" />
       <AppChoresGroceries v-if="choreTab === 'Groceries'" />
     </div>

@@ -72,7 +72,7 @@
       <div v-if="!isConnected" class="w-full" style="height: calc(100vh - 9rem)">
         <LoginForm />
       </div>
-      <div v-else class="w-full h-full">
+      <div v-else class="w-full" style="height: calc(100vh - 9rem)">
         <AppEventPlanner v-if="tab === 'Events'" />
         <AppChores v-if="tab === 'Chores'" />
         <AppListRooms v-if="tab === 'Rooms'" />
