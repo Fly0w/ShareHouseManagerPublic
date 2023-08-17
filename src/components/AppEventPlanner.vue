@@ -31,7 +31,7 @@
         class="absolute z-30 right-3 top-48 flex flex-col justify-center items-center h-12 w-12 border-2 text-4xl font-bolder rounded-full bg-slate-400 border-white text-white"
         @click.prevent="eventTab = 'list'"
       >
-        <p class="relative font-bold">⬅</p>
+        <p class="font-bold">⬅</p>
       </button>
     </div>
 

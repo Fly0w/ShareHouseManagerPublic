@@ -79,8 +79,8 @@ export default {
   data() {
     return {
       selectedRoom: 'A101',
-      loginResidentName: '',
-      loginRoomPassword: '',
+      loginResidentName: 'Gregory',
+      loginRoomPassword: 'A101password',
 
       infoMsg: '',
       loginTabTrigger: false,

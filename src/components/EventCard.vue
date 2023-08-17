@@ -5,7 +5,7 @@
   >
     <p class="text-white text-2xl text-center">Are you sure you want to delete this event ?</p>
     <p class="w-full text-center text-2xl font-bold text-white">{{ event.title }}</p>
-    <div class="">
+    <div class="flex flex-row">
       <button
         class="px-3 mx-4 rounded-lg border-2 border-slate-100 bg-red-700 text-white text-xl"
         @click="deleteEvent"

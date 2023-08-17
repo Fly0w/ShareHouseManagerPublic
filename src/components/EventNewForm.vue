@@ -92,7 +92,7 @@
     </div>
     <button
       type="submit"
-      class="mt-5 px-8 py-2 bg-yellow-500/95 border-4 border-yellow-600 rounded-full text-slate-100 text-xl"
+      class="mt-5 px-8 py-2 bg-yellow-500 border-4 border-yellow-600 rounded-full text-slate-100 text-xl"
     >
       Create new event
     </button>

@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia'
 import { auth, db, usersCollection } from '../includes/firebase'
 import { doc, getDoc } from 'firebase/firestore'
+import { signOut } from 'firebase/auth'
 
 export default defineStore('authentication', {
   state: () => ({
-    isConnected: true,
+    isConnected: false,
     userData: {
       roomNumber: '',
       residentName: '',
@@ -47,8 +48,10 @@ export default defineStore('authentication', {
           roomEmoji: docSnap.data().roomEmoji,
           roomEvents: docSnap.data().roomEvents
         }
+        return true
       } catch (error) {
         console.log(error)
+        return false
       }
     },
     async createAuthAndFirestoreDB(listRooms) {
@@ -72,6 +75,23 @@ export default defineStore('authentication', {
         console.log('ok')
       } catch (error) {
         console.log(error)
+      }
+    },
+    async logOut() {
+      try {
+        signOut(auth)
+        this.isConnected = false
+        this.userData = {
+          roomNumber: '',
+          residentName: '',
+          residentNameKanji: '',
+          roomEmoji: '',
+          roomEvents: []
+        }
+        return true
+      } catch (error) {
+        console.log(error)
+        return false
       }
     }
   }
