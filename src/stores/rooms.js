@@ -110,8 +110,8 @@ export default defineStore('rooms', {
       },
       B104: {
         roomNumber: 'B104',
-        residentName: '???',
-        residentNameKanji: '???',
+        residentName: 'Hana',
+        residentNameKanji: 'ハナ',
         roomEmail: 'B104@hotmail.com',
         roomEmoji: '🐰',
         roomEvents: []
