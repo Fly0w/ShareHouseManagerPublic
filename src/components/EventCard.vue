@@ -57,7 +57,7 @@
           </div>
 
           <div class="flex flex-row items-center">
-            <UserIcon class="h-7 w-7 ml-2 mr-2" />
+            <UserIcon class="h-8 w-8 ml-2.5 mr-2" />
             <p class="w-full text-center">{{ event.author }}</p>
           </div>
         </div>
