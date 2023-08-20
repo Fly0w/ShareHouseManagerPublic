@@ -3,15 +3,15 @@
     class="relative flex flex-col items-center justify-center w-2/5 h-32 my-2 p-1.5 border-4 border-emerald-800 rounded-2xl bg-teal-400 font-montserrat font-bold text-slate-50 text-center shadow-lg shadow-cyan-500"
     @click.prevent="toggleConfirm = true"
   >
-    <TinFoilIcon v-if="category === 'Tin Foil'" class="w-5/6" />
-    <PlasticBagsIcon v-if="category === 'Plastic Bags'" class="w-4/6" />
-    <DishSoapIcon v-if="category === 'Dish Soap'" class="w-4/6" />
-    <PlasticWrapIcon v-if="category === 'Plastic Wrap'" class="w-5/6" />
-    <ToiletPaperIcon v-if="category === 'Toilet Paper'" class="w-4/6" />
-    <SoapIcon v-if="category === 'Hand Soap'" class="w-4/6" />
-    <SpongeIcon v-if="category === 'Sponge'" class="w-4/6" />
-    <CleaningProductIcon v-if="category === 'Cleaning Product'" class="w-4/6" />
-    <KitchenPaperIcon v-if="category === 'Kitchen Paper'" class="w-4/6" />
+    <TinFoilIcon v-if="category === 'Tin Foil'" class="" />
+    <PlasticBagsIcon v-if="category === 'Plastic Bags'" class="" />
+    <DishSoapIcon v-if="category === 'Dish Soap'" class="" />
+    <PlasticWrapIcon v-if="category === 'Plastic Wrap'" class="" />
+    <ToiletPaperIcon v-if="category === 'Toilet Paper'" class="" />
+    <SoapIcon v-if="category === 'Hand Soap'" class="" />
+    <SpongeIcon v-if="category === 'Sponge'" class="" />
+    <CleaningProductIcon v-if="category === 'Cleaning Product'" class="" />
+    <KitchenPaperIcon v-if="category === 'Kitchen Paper'" class="" />
     <p class="mt-2 text-sm">{{ category }}</p>
 
     <div
