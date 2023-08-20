@@ -22,13 +22,16 @@
   </div>
 
   <div class="relative w-full h-full">
+    <!-- Background -->
     <img v-if="!triggerConfirmDelete" src="/event-bg-min.png" class="absolute -z-5 w-full h-full" />
+    <!-- Content -->
     <div
       v-if="!triggerConfirmDelete"
       class="relative z-5 flex flex-col w-full h-44 px-1 py-1 border-t-2 bg-slate-100/90 border-violet-700"
     >
+      <!-- Edit and delete, and title -->
       <div class="relative w-full h-full">
-        <div class="absolute top-1 left-2">
+        <div class="flex flex-row justify-center absolute top-1 left-2">
           <button class="text-green-500 mx-3" @click="toggleEdit()">
             <EditIcon class="h-6 w-6" />
           </button>
@@ -36,7 +39,6 @@
             <DeleteIcon class="h-6 w-6" />
           </button>
         </div>
-
         <p class="h-1/6 w-full text-center text-xl font-bold text-purple-900">{{ event.title }}</p>
       </div>
 
