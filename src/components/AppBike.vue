@@ -3,12 +3,12 @@
     <!-- Title -->
     <div
       class="flex flex-col items-center justify-center w-full py-2 bg-green-200/95"
-      style="height: 10%"
+      style="height: 15%"
     >
       <h2 class="text-3xl tracking-widest italic text-green-700 font-bold">Omote-bike</h2>
-      <p class="text-xl" v-if="bikeStore.isBikeUsed">
-        <span class="text-red-700 font-bold text-2xl">{{ bikeStore.currentBikeUser }}</span> is
-        using the bike now
+      <p class="text-xl" v-if="usageState.isBeingUsed">
+        <span class="text-red-700 font-bold text-2xl">{{ usageState.currentUser }}</span>
+        is using the bike now
       </p>
       <p class="text-xl" v-else>Nobody is using the bike</p>
     </div>
@@ -16,33 +16,19 @@
     <!-- Form -->
     <div class="w-full h-52 py-3">
       <form
-        v-if="!bikeStore.isBikeUsed"
+        v-if="!usageState.isBeingUsed"
         class="h-full w-full flex flex-col items-center justify-center"
-        @submit="bikeStore.startUsing"
+        @submit.prevent="startUsing(`${userData.residentName} ${userData.roomEmoji}`)"
       >
-        <label class="text-2xl font-bold text-emerald-700 mb-2">Select your name :</label>
-        <select
-          id="nameChoice"
-          name="name"
-          class="border-2 border-yellow-500 p-3 rounded-full overflow-y-auto"
-          v-model="bikeStore.selectedName"
-          @change="bikeStore.handleNameSelection"
-        >
-          <option value="">Choose your name</option>
-          <option v-for="room in listRooms" :key="room.residentName" :value="room.residentName">
-            {{ room.residentName }}
-          </option>
-        </select>
+        <div class="w-full">
+          <p class="text-center text-3xl text-teal-700">
+            {{ userData.residentName }} {{ userData.roomEmoji }}
+          </p>
+        </div>
 
         <button
           type="submit"
-          class="z-10 relative flex flex-col items-center justify-center h-12 w-2/5 mt-3 border-2 rounded-full text-xl font-bold"
-          :class="{
-            'bg-gray-600 text-white opacity-20': bikeStore.isNameSelected === false,
-            'border-white text-white rolling_bg active:translate-y-1':
-              bikeStore.isNameSelected === true
-          }"
-          :disabled="bikeStore.isNameSelected === false"
+          class="z-10 relative flex flex-col items-center justify-center h-12 w-2/5 mt-3 border-2 rounded-full text-xl font-bold border-white text-white rolling_bg active:translate-y-1"
         >
           Start
         </button>
@@ -51,11 +37,11 @@
       <form
         v-else
         class="h-full w-full flex flex-col items-center justify-center"
-        @submit="bikeStore.stopUsing"
+        @submit.prevent="stopUsing"
       >
         <div class="flex flex-col">
           <p class="text-xl">The lock passcode is :</p>
-          <p class="text-3xl font-bold my-1 text-green-700">7 1 5 3</p>
+          <p class="text-5xl font-bold my-1 text-green-700 tracking-widest">{{ lockPass }}</p>
         </div>
         <button
           type="submit"
@@ -69,14 +55,10 @@
     <!-- History -->
     <h3 class="text-xl font-bold italic text-slate-800">History</h3>
     <div
-      class="flex flex-col items-center px-3 py-2 mx-2 border-4 border-green-500 rounded-3xl bg-slate-50 bg-opacity-50 overflow-y-auto"
-      :class="{
-        'h-52': isScreenHeightLessThan670(),
-        'h-96': isScreenHeightGreaterThanOrEqualTo670()
-      }"
-      style="width: 95%"
+      class="flex flex-col justify-start px-3 py-2 mx-2 border-4 border-green-500 rounded-3xl bg-slate-50 bg-opacity-50 overflow-y-auto"
+      style="width: 95%; height: 70%"
     >
-      <div class="flex flex-col w-full" v-for="entry in bikeStore.history" :key="entry.startDate">
+      <div class="w-full" v-for="entry in history.slice().reverse()" :key="entry.startDate">
         <BikeHistoryCard :entry="entry" />
       </div>
     </div>
@@ -84,31 +66,25 @@
 </template>
 
 <script>
-import useRoomsStore from '@/stores/rooms'
-import { mapState, mapStores } from 'pinia'
 import BikeHistoryCard from './BikeHistoryCard.vue'
+
+import { mapState, mapActions } from 'pinia'
+import useRoomsStore from '@/stores/rooms'
 import useBikeStore from '@/stores/bike'
+import useAuthenticationStore from '@/stores/authentication'
 
 export default {
   name: 'AppBike',
   data() {
     return {}
   },
-  mounted() {
-    // importer historique & importer state database
-    console.log('mounted comp bike')
-  },
   methods: {
-    isScreenHeightLessThan670() {
-      return window.innerHeight < 670
-    },
-    isScreenHeightGreaterThanOrEqualTo670() {
-      return window.innerHeight >= 670
-    }
+    ...mapActions(useBikeStore, ['startUsing', 'stopUsing'])
   },
   computed: {
     ...mapState(useRoomsStore, ['listRooms']),
-    ...mapStores(useBikeStore)
+    ...mapState(useAuthenticationStore, ['userData']),
+    ...mapState(useBikeStore, ['usageState', 'lockPass', 'history'])
   },
   components: { BikeHistoryCard }
 }

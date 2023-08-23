@@ -149,36 +149,14 @@ export default defineStore('rooms', {
         roomEmoji: '',
         roomEvents: []
       }
-    },
-    duoRoomsGarbage: [
-      ['B104', 'B201'],
-      ['B202', 'B203'],
-      ['B204', 'A101'],
-      ['A1021', 'A1022'],
-      ['A201', 'A202'],
-      ['A203', 'A204'],
-      ['A205', 'B101'],
-      ['A2061', 'A2062'],
-      ['B102', 'B103']
-    ],
-    duoRoomsGroceries: [
-      ['A203', 'B202'],
-      ['A204', 'B203'],
-      ['A205', 'B204'],
-      ['A2061', 'A2062'],
-      ['A101', 'B101'],
-      ['A1021', 'B102'],
-      ['A1022', 'B103'],
-      ['A201', 'B104'],
-      ['A202', 'B201']
-    ]
+    }
   }),
-  actions: {
-    async getAllRooms() {
+  getters: {
+    async getAllRooms(state) {
       try {
         const querySnapshot = await getDocs(collection(db, 'users'))
         querySnapshot.forEach((doc) => {
-          this.listRooms[doc.id] = doc.data()
+          state.listRooms[doc.id] = doc.data()
         })
         return true
       } catch (error) {

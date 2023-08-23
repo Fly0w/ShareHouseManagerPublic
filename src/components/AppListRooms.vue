@@ -35,21 +35,25 @@
     <!-- Room list -->
     <div class="mx-5 overflow-y-auto rounded-2xl" style="height: 70%">
       <div v-if="houseSelect === 'A house'">
-        <div v-for="room in listRooms" :key="room.roomNumber" class="">
+        <div v-for="(room, key) in listRooms" :key="room.roomNumber" class="">
           <AppRoom
-            :roomNumber="room.roomNumber"
+            :roomNumberText="room.roomNumber"
+            :roomNumberData="key"
             :residentName="room.residentName"
             :residentNameKanji="room.residentNameKanji"
+            :roomEmoji="room.roomEmoji"
             :houseSelect="houseSelect"
           />
         </div>
       </div>
       <div v-else-if="houseSelect === 'B house'">
-        <div v-for="room in listRooms" :key="room.roomNumber" class="">
+        <div v-for="(room, key) in listRooms" :key="room.roomNumber" class="">
           <AppRoom
-            :roomNumber="room.roomNumber"
+            :roomNumberText="room.roomNumber"
+            :roomNumberData="key"
             :residentName="room.residentName"
             :residentNameKanji="room.residentNameKanji"
+            :roomEmoji="room.roomEmoji"
             :houseSelect="houseSelect"
           />
         </div>
@@ -71,7 +75,6 @@ export default {
       houseSelect: 'A house'
     }
   },
-
   computed: {
     ...mapState(useRoomsStore, ['listRooms'])
   },

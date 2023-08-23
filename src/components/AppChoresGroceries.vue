@@ -6,33 +6,21 @@
     <div class="flex flex-col mr-2">
       <p class="my-1 text-emerald-700 opacity-60">
         Last month:
-        <span class="font-bold">{{
-          listRooms[duoRoomsGroceries[monthIDs.lastMonthID][0]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[monthDuo?.last?.duo1]?.residentName }}</span>
         &
-        <span class="font-bold">{{
-          listRooms[duoRoomsGroceries[monthIDs.lastMonthID][1]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[monthDuo?.last?.duo2]?.residentName }}</span>
       </p>
       <p class="text-lg text-emerald-800">
         This month:
-        <span class="font-bold">{{
-          listRooms[duoRoomsGroceries[monthIDs.thisMonthID][0]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[monthDuo?.now?.duo1]?.residentName }}</span>
         &
-        <span class="font-bold">{{
-          listRooms[duoRoomsGroceries[monthIDs.thisMonthID][1]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[monthDuo?.now?.duo2]?.residentName }}</span>
       </p>
       <p class="my-1 text-emerald-700 opacity-60">
         Next month:
-        <span class="font-bold">{{
-          listRooms[duoRoomsGroceries[monthIDs.nextMonthID][0]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[monthDuo?.next?.duo1]?.residentName }}</span>
         &
-        <span class="font-bold">{{
-          listRooms[duoRoomsGroceries[monthIDs.nextMonthID][1]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[monthDuo?.next?.duo2]?.residentName }}</span>
       </p>
     </div>
     <RobotIcon height="70%" />
@@ -94,8 +82,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(useRoomsStore, ['listRooms', 'duoRoomsGroceries']),
-    ...mapState(useChoresStore, ['monthIDs', 'getDateToday'])
+    ...mapState(useRoomsStore, ['listRooms']),
+    ...mapState(useChoresStore, ['monthDuo'])
   },
   components: { RobotIcon, AppGroceryItemButton, AppGroceriesExplanation }
 }

@@ -7,33 +7,21 @@
     <div class="flex flex-col ml-2">
       <p class="my-1 text-sky-700 opacity-60">
         Last week:
-        <span class="font-bold">{{
-          listRooms[duoRoomsGarbage[weekIDs.lastWeekID][0]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[weekDuo?.last?.duo1]?.residentName }}</span>
         &
-        <span class="font-bold">{{
-          listRooms[duoRoomsGarbage[weekIDs.lastWeekID][1]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[weekDuo?.last?.duo2]?.residentName }}</span>
       </p>
       <p class="text-lg text-sky-900">
         This week:
-        <span class="font-bold">{{
-          listRooms[duoRoomsGarbage[weekIDs.thisWeekID][0]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[weekDuo?.now?.duo1]?.residentName }}</span>
         &
-        <span class="font-bold">{{
-          listRooms[duoRoomsGarbage[weekIDs.thisWeekID][1]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[weekDuo?.now?.duo2]?.residentName }}</span>
       </p>
       <p class="my-1 text-sky-700 opacity-60">
         Next week:
-        <span class="font-bold">{{
-          listRooms[duoRoomsGarbage[weekIDs.nextWeekID][0]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[weekDuo?.next?.duo1]?.residentName }}</span>
         &
-        <span class="font-bold">{{
-          listRooms[duoRoomsGarbage[weekIDs.nextWeekID][1]].residentName
-        }}</span>
+        <span class="font-bold">{{ listRooms[weekDuo?.next?.duo2]?.residentName }}</span>
       </p>
     </div>
   </div>
@@ -86,8 +74,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(useRoomsStore, ['listRooms', 'duoRoomsGarbage']),
-    ...mapState(useChoresStore, ['weekIDs', 'getDateToday'])
+    ...mapState(useRoomsStore, ['listRooms']),
+    ...mapState(useChoresStore, ['weekDuo', 'getDateToday'])
   },
   components: { AppGarbageDayWeek, AppGarbageExplanation, RobotIcon },
   props: ['daysWeek']

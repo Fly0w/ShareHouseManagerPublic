@@ -292,7 +292,7 @@ export default {
   async mounted() {
     // To avoid making a request everytime this component is mounted, we check if the list of rooms is empty. If empty, make a request, otherwise, just use the store
     if (!this.listRooms.A101.roomNumber) {
-      const gotRoom = await this.getAllRooms()
+      const gotRoom = await this.getAllRooms
       gotRoom === true ? (this.gotRoomSuccess = true) : (this.gotRoomSuccess = false)
     } else {
       this.gotRoomSuccess = true
@@ -300,7 +300,6 @@ export default {
   },
   methods: {
     ...mapActions(useAuthenticationStore, ['sendLoginDB', 'getUserData']),
-    ...mapActions(useRoomsStore, ['getAllRooms']),
     async sendLogin() {
       this.loginTabTrigger = false
       this.sendingLoginInfo = true
@@ -308,7 +307,6 @@ export default {
       this.credentialsCheck = 'checking'
 
       const login = this.sendLoginDB(
-        this.listRooms,
         this.selectedRoom,
         this.loginResidentName,
         this.loginRoomPassword
@@ -331,7 +329,7 @@ export default {
   },
 
   computed: {
-    ...mapState(useRoomsStore, ['listRooms']),
+    ...mapState(useRoomsStore, ['listRooms', 'getAllRooms']),
     ...mapWritableState(useAuthenticationStore, ['isConnected'])
   }
 }
