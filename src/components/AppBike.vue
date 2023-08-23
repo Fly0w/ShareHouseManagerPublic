@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col items-center h-full w-full pb-3 font-montserrat text-center">
+  <div
+    class="flex flex-col items-center justify-between h-full w-full pb-3 font-montserrat text-center"
+  >
     <!-- Title -->
     <div
       class="flex flex-col items-center justify-center w-full py-2 bg-green-200/95"
@@ -14,7 +16,7 @@
     </div>
 
     <!-- Form -->
-    <div class="w-full h-52 py-3">
+    <div class="w-full py-3">
       <form
         v-if="!usageState.isBeingUsed"
         class="h-full w-full flex flex-col items-center justify-center"
@@ -56,7 +58,7 @@
     <h3 class="text-xl font-bold italic text-slate-800">History</h3>
     <div
       class="flex flex-col justify-start px-3 py-2 mx-2 border-4 border-green-500 rounded-3xl bg-slate-50 bg-opacity-50 overflow-y-auto"
-      style="width: 95%; height: 70%"
+      style="width: 95%; height: 65%"
     >
       <div class="w-full" v-for="entry in history.slice().reverse()" :key="entry.startDate">
         <BikeHistoryCard :entry="entry" />
