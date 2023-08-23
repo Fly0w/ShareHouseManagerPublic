@@ -189,7 +189,7 @@ export default {
   name: 'App',
   data() {
     return {
-      tab: 'Bike',
+      tab: 'Chores',
       loggedUser: '',
       userTabTrigger: false,
       logoutBtnMsg: 'Logout'
