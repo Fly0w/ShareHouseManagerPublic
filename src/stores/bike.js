@@ -58,7 +58,6 @@ export default defineStore('bike', {
       }
     },
     async stopUsing() {
-      // Envoyer info database 1.update state 2. Ecrire history
       try {
         const docHistory = doc(db, 'bike', 'history')
         const docUsageState = doc(db, 'bike', 'usageState')
@@ -69,6 +68,12 @@ export default defineStore('bike', {
             startTime: this.usageState.startTime,
             endTime: moment().format('llll')
           })
+        })
+
+        this.history.push({
+          name: this.usageState.currentUser,
+          startTime: this.usageState.startTime,
+          endTime: moment().format('llll')
         })
 
         await updateDoc(docUsageState, {

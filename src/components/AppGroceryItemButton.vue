@@ -1,7 +1,7 @@
 <template>
   <div
     class="relative flex flex-col items-center justify-center w-2/5 h-32 my-2 p-1.5 border-4 border-emerald-800 rounded-2xl bg-teal-400 font-montserrat font-bold text-slate-50 text-center shadow-lg shadow-cyan-500"
-    @click.prevent="toggleConfirm = true"
+    @click.prevent="triggerConfirm = 'confirm'"
   >
     <TinFoilIcon v-if="category === 'Tin Foil'" class="" />
     <PlasticBagsIcon v-if="category === 'Plastic Bags'" class="" />
@@ -15,7 +15,7 @@
     <p class="mt-2 text-sm">{{ category }}</p>
 
     <div
-      v-show="toggleConfirm"
+      v-if="triggerConfirm === 'confirm'"
       class="absolute flex flex-col items-center justify-around z-1 h-full w-full p-1 border-4 border-yellow-600 rounded-xl bg-slate-50 bg-opacity-90 font-montserrat text-cyan-900"
     >
       <p
@@ -29,24 +29,24 @@
       </p>
       <div class="flex flex-row justify-around items-center w-full h-2/6">
         <div
-          class="flex justify-center items-center h-full w-2/5 border-4 border-red-900 rounded-2xl bg-red-600 text-red-800"
-          @click.stop="toggleConfirm = false"
+          class="relative flex justify-center items-center h-9 w-9 border-4 border-red-800 rounded-full bg-red-600"
+          @click.stop="triggerConfirm = 'none'"
         >
           <!-- @click.stop disables parents event contagion, and thus allows the click to close the overlay -->
-          x
+          <p class="absolute text-red-800">✖</p>
         </div>
         <div
-          class="flex justify-center items-center h-full w-2/5 border-4 border-emerald-600 rounded-2xl bg-emerald-500 text-green-800"
-          @click.stop="sendAlertItem(category), toggleItemOrderedScreen()"
+          class="relative flex justify-center items-center h-9 w-9 border-4 border-emerald-600 rounded-full bg-emerald-500"
+          @click.stop="AddNeedComponent()"
         >
           <!-- @click.stop disables parents event contagion, and thus allows the click to close the overlay -->
-          o
+          <p class="absolute text-green-800 text-lg font-bold">✓</p>
         </div>
       </div>
     </div>
 
     <div
-      v-show="toggleOrderOk"
+      v-else-if="triggerConfirm === 'done'"
       class="absolute flex flex-col items-center justify-around z-1 h-full w-full p-1 rounded-xl bg-sky-500 bg-opacity-90 font-montserrat text-white text-3xl"
     >
       Done !
@@ -65,24 +65,31 @@ import CleaningProductIcon from './icons/groceries/CleaningProductIcon.vue'
 import ToiletPaperIcon from './icons/groceries/ToiletPaperIcon.vue'
 import KitchenPaperIcon from './icons/groceries/KitchenPaperIcon.vue'
 
+import useChoresStore from '@/stores/chores'
+import useAuthenticationStore from '@/stores/authentication'
+import { mapWritableState, mapState, mapActions } from 'pinia'
+
 export default {
   name: 'AppGroceryItemButton',
   data() {
     return {
-      toggleConfirm: false,
-      toggleOrderOk: false
+      triggerConfirm: 'none'
     }
   },
   methods: {
-    sendAlertItem(item) {
-      this.toggleConfirm = false
-      console.log('Sending alert for', item)
-    },
-    toggleItemOrderedScreen() {
-      this.toggleOrderOk = true
+    ...mapActions(useChoresStore, ['updateNeeds']),
+    AddNeedComponent() {
+      //Update the store and call the database function to add the need
+      console.log('click')
+      this.triggerConfirm = 'done'
       setTimeout(() => {
-        this.toggleOrderOk = false
-      }, 2000)
+        this.groceries.needs.push({
+          item: this.category,
+          orderedBy: `${this.userData.residentName} ${this.userData.roomEmoji}`
+        })
+        this.updateNeeds()
+        this.triggerConfirm = 'none'
+      }, 1500)
     },
     isScreenHeightLessThan670() {
       return window.innerHeight < 670
@@ -90,6 +97,10 @@ export default {
     isScreenHeightGreaterThanOrEqualTo670() {
       return window.innerHeight >= 670
     }
+  },
+  computed: {
+    ...mapState(useAuthenticationStore, ['userData']),
+    ...mapWritableState(useChoresStore, ['groceries'])
   },
   components: {
     TinFoilIcon,

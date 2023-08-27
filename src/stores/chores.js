@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { db } from '../includes/firebase'
-import { getDoc, setDoc, collection, doc } from 'firebase/firestore'
+import { getDoc, setDoc, collection, doc, updateDoc } from 'firebase/firestore'
 
 export default defineStore('chores', {
   state: () => ({
@@ -147,6 +147,17 @@ export default defineStore('chores', {
         console.log(error)
         return false
       }
+    },
+    async updateNeeds() {
+      // Function to rewrite the needs in the database
+      try {
+        const docGroceries = doc(db, 'chores', 'groceries')
+        await updateDoc(docGroceries, {
+          needs: this.groceries.needs
+        })
+      } catch (error) {
+        console.log('nope', error)
+      }
     }
   },
   getters: {
@@ -168,7 +179,6 @@ export default defineStore('chores', {
         return false
       }
     },
-
     weekIDs(state) {
       const now = new Date()
       const startDateMs = Date.parse('January 1, 2023')
