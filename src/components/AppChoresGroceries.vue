@@ -62,7 +62,7 @@
         'border-b-2 border-b-sky-500 border-x-gray-400 border-t-gray-400': tab === 'needs'
       }"
     >
-      Order items
+      Orders
     </div>
   </div>
 

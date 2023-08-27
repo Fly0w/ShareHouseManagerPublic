@@ -34,22 +34,22 @@
 
     <div
       v-else-if="triggerConfirm === 'confirm'"
-      class="flex flex-row justify-center w-4/5 px-2 bg-sky-300/50 border-y-2 border-r-2 border-sky-500 rounded-r-xl"
+      class="flex flex-row justify-around w-4/5 px-2 bg-sky-300/50 border-y-2 border-r-2 border-sky-500 rounded-r-xl"
     >
-      <div class="flex flex-col justify-center items-center w-3/5 text-sky-800">
+      <div class="flex flex-col justify-center items-center text-sky-800">
         <p>Did you get</p>
         <p class="text-lg font-semibold">{{ needInfo.item }} ?</p>
       </div>
 
-      <div class="flex flex-row justify-around w-2/5">
+      <div class="flex flex-row justify-around">
         <div
-          class="relative top-2 w-10 h-10 flex flex-col items-center justify-center bg-emerald-500 border-4 border-emerald-700 rounded-full"
+          class="relative top-3 w-9 h-9 flex flex-col items-center justify-center bg-emerald-500 border-4 border-emerald-700 rounded-full"
           @click="removeNeedComponent()"
         >
           <p class="absolute text-white text-2xl font-bold">✓</p>
         </div>
         <div
-          class="relative top-2 w-10 h-10 flex flex-col items-center justify-center bg-red-500 border-4 border-red-700 rounded-full"
+          class="relative top-3 w-9 h-9 flex flex-col items-center justify-center bg-red-500 border-4 border-red-700 rounded-full"
           @click="triggerConfirm = 'none'"
         >
           <p class="absolute text-white text-2xl">✖</p>
