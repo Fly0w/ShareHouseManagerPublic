@@ -70,7 +70,7 @@
 
 <script>
 import BikeHistoryCard from './BikeHistoryCard.vue'
-import BikeAnimation from './icons/bikeAnimation.vue'
+import BikeAnimation from './icons/BikeAnimation.vue'
 
 import { mapState, mapActions } from 'pinia'
 import useRoomsStore from '@/stores/rooms'
