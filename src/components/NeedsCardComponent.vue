@@ -1,37 +1,43 @@
 <template>
-  <div class="flex flex-row w-full h-16 mt-1.5">
+  <div class="flex flex-row w-full h-16 mb-1.5">
     <div
-      class="flex flex-col items-center justify-center w-1/5 p-2 bg-blue-300 border-y-2 border-l-2 rounded-l-3xl border-sky-500"
+      class="flex flex-col items-center justify-center w-1/5 py-1 px-1.5 bg-blue-300 border-y-2 border-l-2 rounded-l-3xl border-sky-500"
     >
-      <TinFoilIcon v-if="needInfo.item === 'Tin Foil'" class="" />
-      <PlasticBagsIcon v-if="needInfo.item === 'Plastic Bags'" class="" />
-      <DishSoapIcon v-if="needInfo.item === 'Dish Soap'" class="" />
-      <PlasticWrapIcon v-if="needInfo.item === 'Plastic Wrap'" class="" />
-      <ToiletPaperIcon v-if="needInfo.item === 'Toilet Paper'" class="" />
-      <SoapIcon v-if="needInfo.item === 'Hand Soap'" class="" />
-      <SpongeIcon v-if="needInfo.item === 'Sponge'" class="" />
-      <CleaningProductIcon v-if="needInfo.item === 'Cleaning Product'" class="" />
-      <KitchenPaperIcon v-if="needInfo.item === 'Kitchen Paper'" class="" />
+      <TinFoilIcon v-if="needInfo.item === 'Tin Foil'" class="w-full h-full" />
+      <PlasticBagsIcon v-if="needInfo.item === 'Plastic Bags'" class="w-full h-full" />
+      <DishSoapIcon v-if="needInfo.item === 'Dish Soap'" class="w-full h-full" />
+      <PlasticWrapIcon v-if="needInfo.item === 'Plastic Wrap'" class="w-full h-full" />
+      <ToiletPaperIcon v-if="needInfo.item === 'Toilet Paper'" class="w-full h-full" />
+      <SoapIcon v-if="needInfo.item === 'Hand Soap'" class="w-full h-full" />
+      <SpongeIcon v-if="needInfo.item === 'Sponge'" class="w-full h-full" />
+      <CleaningProductIcon v-if="needInfo.item === 'Cleaning Product'" class="w-full h-full" />
+      <KitchenPaperIcon v-if="needInfo.item === 'Kitchen Paper'" class="w-full h-full" />
     </div>
 
     <div
       v-if="triggerConfirm === 'none'"
       class="flex flex-row w-4/5 px-2 bg-slate-50/40 border-y-2 border-r-2 border-sky-500 rounded-r-xl"
     >
-      <div class="flex flex-col items-start justify-center w-4/5 h-full px-1">
-        <p class="font-semibold text-xl text-sky-700">{{ needInfo.item }}</p>
+      <div class="flex flex-col items-start justify-center w-5/6 h-full px-1">
+        <p class="font-semibold text-sky-700 min-[360px]:text-xl">
+          {{ needInfo.item }}
+        </p>
         <p class="text-xs">
-          Ordered by <span class="text-sm font-semibold">{{ needInfo.orderedBy }}</span>
+          Ordered by
+          <span class="max-[360px]:text-xs min-[360px]:text-sm font-semibold">{{
+            needInfo.orderedBy
+          }}</span>
         </p>
       </div>
       <div
-        class="relative top-2 w-11 h-11 flex flex-col items-center justify-center bg-emerald-500 border-4 border-emerald-700 rounded-full"
+        class="relative top-2 w-10 h-10 flex flex-col items-center justify-center bg-emerald-500 border-4 border-emerald-700 rounded-full"
         @click="triggerConfirm = 'confirm'"
       >
         <p class="absolute text-white text-2xl font-bold">✓</p>
       </div>
     </div>
 
+    <!-- Confirmation panel -->
     <div
       v-else-if="triggerConfirm === 'confirm'"
       class="flex flex-row justify-around w-4/5 px-2 bg-sky-300/50 border-y-2 border-r-2 border-sky-500 rounded-r-xl"
@@ -57,6 +63,7 @@
       </div>
     </div>
 
+    <!-- Done panel -->
     <div
       v-else-if="triggerConfirm === 'done'"
       class="flex flex-row justify-center w-4/5 px-2 bg-sky-300/50 border-y-2 border-r-2 border-sky-500 rounded-r-xl"

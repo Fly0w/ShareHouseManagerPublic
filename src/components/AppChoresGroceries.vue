@@ -32,7 +32,7 @@
   </div>
 
   <!-- Tabs -->
-  <div class="flex flex-row w-5/6 text-center text-lg mt-8 relative">
+  <div class="flex flex-row w-11/12 text-center text-lg mt-8 relative">
     <!-- Explanation button -->
     <div class="absolute inset-0 flex items-center justify-center z-5 pointer-events-none">
       <div
@@ -69,7 +69,7 @@
   <div class="flex flex-col items-center w-full h-3/5">
     <div
       v-if="tab === 'needs'"
-      class="flex flex-col items-start flex-wrap w-5/6 h-full p-2 rounded-b-2xl bg-sky-200/60 border-x-2 border-b-2 border-sky-500 overflow-y-auto"
+      class="flex flex-col items-end w-11/12 h-full p-2 rounded-b-2xl bg-sky-200/60 border-x-2 border-b-2 border-sky-500 overflow-y-auto"
     >
       <div v-if="groceries.needs[0]" class="h-full w-full">
         <NeedsCardComponent v-for="need in groceries.needs" :key="need.item" :needInfo="need" />
@@ -81,7 +81,7 @@
     </div>
     <div
       v-if="tab === 'items'"
-      class="flex flex-row flex-wrap justify-around w-5/6 h-full p-2 rounded-b-2xl bg-teal-100/60 border-x-2 border-b-2 border-teal-500 overflow-y-auto"
+      class="flex flex-row flex-wrap justify-around w-11/12 h-full p-2 rounded-b-2xl bg-teal-100/60 border-x-2 border-b-2 border-teal-500 overflow-y-auto"
     >
       <AppGroceryItemButton v-for="category in categories" :key="category" :category="category" />
     </div>

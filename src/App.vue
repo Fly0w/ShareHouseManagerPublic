@@ -27,10 +27,10 @@
           <h3 class="font-montserrat text-lg text-slate-100">Omotesando 1</h3>
         </div>
 
-        <!-- User's profile access button -->
+        <!-- User's profile access buttons -->
         <div
           v-if="isConnected && isGoodscreenWidth"
-          class="flex flex-col relative z-5 justify-center items-center w-1/6"
+          class="relative z-5 flex flex-col justify-center items-center w-1/6"
         >
           <p
             class="h-10 w-10 flex flex-col items-center justify-center border-2 border-orange-500 bg-yellow-100/70 rounded-full text-xl mb-1 active:translate-y-1"
@@ -41,7 +41,7 @@
           <p class="text-white tracking-wider">{{ userData.residentName }}</p>
           <p
             v-if="userTabTrigger"
-            class="absolute -bottom-11 px-3 py-0.5 text-center border-2 border-emerald-700 bg-sky-400 text-slate-100 font-bold rounded-full active:translate-y-1"
+            class="absolute -bottom-11 right-1 px-3 w-28 py-0.5 text-center font-semibold border-2 border-red-400 bg-orange-600 text-slate-100 rounded-full active:translate-y-1"
             @click="loggingUserOut()"
           >
             {{ logoutBtnMsg }}
@@ -224,7 +224,7 @@ export default {
   methods: {
     ...mapActions(useAuthenticationStore, ['getUserData', 'logOut']),
     loggingUserOut() {
-      this.logoutBtnMsg = '...'
+      this.logoutBtnMsg = `See ya' !`
       setTimeout(() => {
         this.userTabTrigger = false
         this.logOut()

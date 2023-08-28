@@ -32,7 +32,7 @@
           type="submit"
           class="z-10 relative flex flex-col items-center justify-center h-16 w-3/6 mt-7 border-2 rounded-full text-xl font-bold border-white text-white rolling_bg active:translate-y-1"
         >
-          Start
+          <p>Start</p>
         </button>
       </form>
 
@@ -56,9 +56,14 @@
     </div>
 
     <!-- History -->
-    <h3 class="text-xl font-bold italic text-slate-800">History</h3>
+    <h3
+      class="border-x-4 border-t-4 border-b-2 border-x-green-500 border-t-green-500 border-b-green-800 rounded-t-3xl bg-emerald-50/50 text-2xl font-bold text-emerald-800 tracking-wider"
+      style="width: 95%"
+    >
+      History
+    </h3>
     <div
-      class="flex flex-col justify-start px-3 py-2 mx-2 border-4 border-green-500 rounded-3xl bg-slate-50 bg-opacity-50 overflow-y-auto"
+      class="flex flex-col justify-start px-3 py-2 mx-2 border-x-4 border-b-4 border-x-green-500 border-b-green-500 rounded-b-3xl bg-emerald-50/50 overflow-y-auto"
       style="width: 95%; height: 50%"
     >
       <div class="w-full" v-for="entry in history.slice().reverse()" :key="entry.startDate">

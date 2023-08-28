@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute flex flex-col justify-start h-36 w-full p-3 border-b-2 overflow-hidden">
+  <div class="absolute flex flex-col justify-start h-36 w-full p-3 overflow-hidden">
     <Transition type="animation" name="bgTrigger" appear>
       <div class="absolute z-2 border-teal-700 bg-teal-400/95 container"></div>
     </Transition>
