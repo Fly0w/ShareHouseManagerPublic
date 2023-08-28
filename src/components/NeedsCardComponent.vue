@@ -40,11 +40,13 @@
     <!-- Confirmation panel -->
     <div
       v-else-if="triggerConfirm === 'confirm'"
-      class="flex flex-row justify-around w-4/5 px-2 bg-sky-300/50 border-y-2 border-r-2 border-sky-500 rounded-r-xl"
+      class="flex flex-row justify-between w-4/5 px-2 bg-sky-300/50 border-y-2 border-r-2 border-sky-500 rounded-r-xl"
     >
-      <div class="flex flex-col justify-center items-center text-sky-800">
-        <p>Did you get</p>
-        <p class="text-lg font-semibold">{{ needInfo.item }} ?</p>
+      <div class="flex flex-col justify-center items-center w-full text-sky-800 text-center">
+        <p class="min-[395px]:text-base min-[365px]:text-sm max-[365px]:text-xs">Did you get</p>
+        <p class="min-[395px]:text-lg min-[365px]:text-base max-[365px]:text-sm font-semibold">
+          {{ needInfo.item }} ?
+        </p>
       </div>
 
       <div class="flex flex-row justify-around">
