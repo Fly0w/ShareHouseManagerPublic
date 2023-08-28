@@ -41,7 +41,7 @@
           <p class="text-white tracking-wider">{{ userData.residentName }}</p>
           <p
             v-if="userTabTrigger"
-            class="absolute -bottom-11 right-1 px-3 w-28 py-0.5 text-center font-semibold border-2 border-red-400 bg-orange-600 text-slate-100 rounded-full active:translate-y-1"
+            class="absolute -bottom-11 -right-2 px-3 max-[370px]:w-24 min-[370px]:w-28 py-0.5 text-center font-semibold border-2 border-red-400 bg-orange-600 text-slate-100 rounded-full active:translate-y-1"
             @click="loggingUserOut()"
           >
             {{ logoutBtnMsg }}
