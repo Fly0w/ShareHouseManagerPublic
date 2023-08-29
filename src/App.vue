@@ -160,7 +160,7 @@
         <p class="text-sky-700 text-4xl text-center m-5">
           This app is meant to be used on a smartphone ...
         </p>
-        <img src="../public/smartphone.png" alt="smartphone" class="h-4/6 mt-10" />
+        <img src="../public/smartphone.png" alt="smartphone" class="mt-10" />
       </div>
     </div>
   </div>
@@ -180,6 +180,7 @@ import useAuthenticationStore from '@/stores/authentication'
 import useRoomsStore from '@/stores/rooms'
 import useChoresStore from '@/stores/chores'
 import useBikeStore from '@/stores/bike'
+import useEventsStore from '@/stores/events'
 import { mapWritableState, mapActions } from 'pinia'
 
 import { auth } from './includes/firebase'
@@ -208,6 +209,7 @@ export default {
         this.weekIDs
         this.monthIDs
         await this.getBikeData
+        await this.getEventsData
       } else {
         // If not connected, reset the store
         this.isConnected = false
@@ -255,6 +257,7 @@ export default {
     ]),
     ...mapWritableState(useRoomsStore, ['getAllRooms']),
     ...mapWritableState(useBikeStore, ['getBikeData', 'setBike']),
+    ...mapWritableState(useEventsStore, ['eventList', 'getEventsData']),
     isGoodscreenWidth() {
       if (window.innerWidth <= 550) {
         return true

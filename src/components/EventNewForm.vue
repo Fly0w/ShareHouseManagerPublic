@@ -94,17 +94,21 @@
       type="submit"
       class="mt-5 px-8 py-2 bg-yellow-500 border-4 border-yellow-600 rounded-full text-slate-100 text-xl"
     >
-      Create new event
+      {{ buttonText }}
     </button>
   </form>
 </template>
 
 <script>
+import useEventsStore from '@/stores/events'
+import useAuthenticationStore from '@/stores/authentication'
+import { mapWritableState, mapState, mapActions } from 'pinia'
+
 export default {
   name: 'EventNewForm',
   data() {
     return {
-      author: '',
+      buttonText: 'Create new event',
       title: '',
       description: '',
       date: {
@@ -112,17 +116,31 @@ export default {
         time: ''
       },
       place: '',
-      links: [],
       link1: '',
       link2: '',
       link3: ''
     }
   },
   methods: {
-    createNewEvent() {
+    ...mapActions(useEventsStore, ['addEvent']),
+    generateRandomString() {
+      //Generate a random ID of length 10
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+      let randomString = ''
+
+      for (let i = 0; i < 10; i++) {
+        const randomIndex = Math.floor(Math.random() * characters.length)
+        randomString += characters.charAt(randomIndex)
+      }
+
+      return randomString
+    },
+    async createNewEvent() {
       // Send info to db
+      const links = [this.link1, this.link2, this.link3].filter((link) => link != false)
       const info = {
-        author: this.author,
+        id: this.generateRandomString(),
+        author: `${this.userData.residentName} ${this.userData.roomEmoji}`,
         title: this.title,
         description: this.description,
         date: {
@@ -130,10 +148,25 @@ export default {
           time: this.date.time
         },
         place: this.place,
-        links: [this.link1, this.link2, this.link3]
+        links: links
       }
-      console.log(info)
+      this.buttonText = 'Creating event...'
+      if ((await this.addEvent(info)) === true) {
+        this.buttonText = 'Success !'
+        this.eventList.push(info)
+        setTimeout(() => {
+          this.toggleTab('list')
+          this.buttonText = 'Create new event !'
+        }, 1500)
+      } else {
+        this.buttonText = 'Error, try again...'
+      }
     }
-  }
+  },
+  computed: {
+    ...mapState(useAuthenticationStore, ['userData']),
+    ...mapWritableState(useEventsStore, ['eventList'])
+  },
+  props: ['toggleTab']
 }
 </script>

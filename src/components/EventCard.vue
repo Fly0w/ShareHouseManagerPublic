@@ -1,6 +1,7 @@
 <template>
+  <!-- Confirmation delete display -->
   <div
-    v-if="triggerConfirmDelete"
+    v-if="triggerConfirm === 'confirm'"
     class="flex flex-col justify-around items-center w-full h-44 px-1 py-1 border-t-2 bg-red-600/90 border-red-700"
   >
     <p class="text-white text-2xl text-center">Are you sure you want to delete this event ?</p>
@@ -8,34 +9,51 @@
     <div class="flex flex-row">
       <button
         class="px-3 mx-4 rounded-lg border-2 border-slate-100 bg-red-700 text-white text-xl"
-        @click="deleteEvent"
+        @click="deleteEvent()"
       >
         Delete event
       </button>
       <button
         class="px-3 mx-4 rounded-lg border-2 border-slate-100 bg-slate-500 text-white text-xl"
-        @click="triggerConfirmDelete = !triggerConfirmDelete"
+        @click="triggerConfirm = 'none'"
       >
         Keep event
       </button>
     </div>
   </div>
 
+  <!-- Done delete display -->
+  <div
+    v-if="triggerConfirm === 'done'"
+    class="flex flex-row justify-start items-center w-full h-44 px-3 py-1 border-t-2 bg-sky-600/90 border-sky-700"
+  >
+    <div class="flex flex-col w-4/6 pl-3">
+      <p class="text-white text-lg mb-3">Successfully deleted the event :</p>
+      <p class="text-white text-2xl font-bold">{{ event.title }}</p>
+    </div>
+    <p class="w-2/6 text-green-400 text-7xl font-bold text-center">✓</p>
+  </div>
+
+  <!-- Event info -->
   <div class="relative w-full h-full">
     <!-- Background -->
-    <img v-if="!triggerConfirmDelete" src="/event-bg-min.png" class="absolute -z-5 w-full h-full" />
+    <img
+      v-if="triggerConfirm === 'none'"
+      src="/event-bg-min.png"
+      class="absolute -z-5 w-full h-full"
+    />
     <!-- Content -->
     <div
-      v-if="!triggerConfirmDelete"
+      v-if="triggerConfirm === 'none'"
       class="relative z-5 flex flex-col w-full h-44 px-1 py-1 border-t-2 bg-slate-100/90 border-violet-700"
     >
       <!-- Edit and delete, and title -->
       <div class="relative w-full h-full">
         <div class="flex flex-row justify-center absolute top-1 left-2">
-          <button class="text-green-500 mx-3" @click="toggleEdit()">
+          <button class="text-green-500 mx-3" @click="triggerEditEvent()">
             <EditIcon class="h-6 w-6" />
           </button>
-          <button class="text-red-500 mx-3" @click="triggerConfirmDelete = !triggerConfirmDelete">
+          <button class="text-red-500 mx-3" @click="triggerConfirm = 'confirm'">
             <DeleteIcon class="h-6 w-6" />
           </button>
         </div>
@@ -70,7 +88,7 @@
           <div class="flex flex-col items-center w-full">
             <p class="text-md font-bold">Links</p>
             <div class="flex flex-row w-full h-fit justify-around">
-              <div v-for="link in event.links" :key="link">
+              <div v-for="link in event?.links" :key="link">
                 <a :href="link" target="_blank"><LinkIcon class="h-8 w-8" /></a>
               </div>
             </div>
@@ -89,19 +107,36 @@ import UserIcon from './icons/events/UserIcon.vue'
 import EditIcon from './icons/events/EditIcon.vue'
 import DeleteIcon from './icons/events/DeleteIcon.vue'
 
+import useEventsStore from '@/stores/events'
+import { mapWritableState, mapActions } from 'pinia'
+
 export default {
   name: 'EventCard',
   data() {
     return {
-      triggerConfirmDelete: false
+      triggerConfirm: 'none'
     }
   },
   methods: {
+    ...mapActions(useEventsStore, ['setEventList']),
+    triggerEditEvent() {
+      this.editEvent = this.event
+      this.toggleTab('edit')
+    },
     deleteEvent() {
-      console.log('deleting event', this.event.id)
+      this.triggerConfirm = 'done'
+      setTimeout(() => {
+        const newList = this.eventList.filter((e) => e.id !== this.event.id)
+        this.eventList = newList
+        this.setEventList()
+        this.triggerConfirm = 'none'
+      }, 2000)
     }
   },
-  props: ['event', 'toggleEdit'],
+  computed: {
+    ...mapWritableState(useEventsStore, ['eventList', 'editEvent'])
+  },
+  props: ['event', 'toggleTab'],
   components: { DateIcon, PlaceIcon, LinkIcon, UserIcon, EditIcon, DeleteIcon }
 }
 </script>

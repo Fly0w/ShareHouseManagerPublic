@@ -71,21 +71,21 @@
         <input
           type="text"
           class="w-3/5 rounded-full px-4 py-1 outline-none border-2 border-cyan-700 focus:ring-2 focus:ring-sky-400"
-          v-model="link1"
+          v-model="links[0]"
           placeholder="Insert URL here"
         />
         <label class="font-bold text-md text-slate-800">Link 2</label>
         <input
           type="text"
           class="w-3/5 rounded-full px-4 py-1 outline-none border-2 border-cyan-700 focus:ring-2 focus:ring-sky-400"
-          v-model="link2"
+          v-model="links[1]"
           placeholder="Insert URL here"
         />
         <label class="font-bold text-md text-slate-800">Link 3</label>
         <input
           type="text"
           class="w-3/5 rounded-full px-4 py-1 outline-none border-2 border-cyan-700 focus:ring-2 focus:ring-sky-400"
-          v-model="link3"
+          v-model="links[2]"
           placeholder="Insert URL here"
         />
       </div>
@@ -94,20 +94,20 @@
       type="submit"
       class="mt-5 px-8 py-2 bg-teal-500 border-4 border-teal-600 rounded-full text-slate-100 text-xl"
     >
-      Edit event
+      {{ buttonText }}
     </button>
   </form>
 </template>
 
 <script>
+import useEventsStore from '@/stores/events'
+import { mapWritableState, mapActions } from 'pinia'
+
 export default {
   name: 'EventEditForm',
-  mounted() {
-    // Récupérer les info de la database avec event id et les stocker dans le state de ce component.
-    console.log('getting db information')
-  },
   data() {
     return {
+      buttonText: 'Edit Event',
       id: '',
       author: '',
       title: '',
@@ -117,16 +117,25 @@ export default {
         time: ''
       },
       place: '',
-      links: [],
-      link1: '',
-      link2: '',
-      link3: ''
+      links: []
     }
   },
+  mounted() {
+    this.id = this.editEvent.id
+    this.author = this.editEvent.author
+    this.title = this.editEvent.title
+    this.description = this.editEvent.description
+    this.date.day = this.editEvent.date.day
+    this.date.time = this.editEvent.date.time
+    this.place = this.editEvent.place
+    this.editEvent.links.forEach((link) => this.links.push(link))
+  },
   methods: {
-    EditEvent() {
-      // Send info to db
+    ...mapActions(useEventsStore, ['setEventList']),
+    async EditEvent() {
+      // Updates db by deleting the old event and adding the updated one
       const info = {
+        id: this.id,
         author: this.author,
         title: this.title,
         description: this.description,
@@ -135,10 +144,22 @@ export default {
           time: this.date.time
         },
         place: this.place,
-        links: [this.link1, this.link2, this.link3]
+        links: this.links
       }
-      console.log(info)
+      this.buttonText = 'Editing event...'
+      setTimeout(() => {
+        const newList = this.eventList.filter((e) => e.id !== this.id) //Removes the old event from the list
+        newList.push(info) //Add the edited event to the list
+        this.eventList = newList //updates the state with the new List
+        this.setEventList()
+        this.toggleTab('list')
+        this.buttonText = 'Edit Event'
+      }, 1500)
     }
-  }
+  },
+  computed: {
+    ...mapWritableState(useEventsStore, ['eventList', 'editEvent'])
+  },
+  props: ['toggleTab']
 }
 </script>
