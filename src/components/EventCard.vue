@@ -45,10 +45,10 @@
     <!-- Content -->
     <div
       v-if="triggerConfirm === 'none'"
-      class="relative z-5 flex flex-col w-full h-44 px-1 py-1 border-t-2 bg-slate-100/90 border-violet-700"
+      class="relative z-5 flex flex-col w-full h-44 px-1 py-1 border-b-2 bg-slate-100/90 border-violet-700"
     >
       <!-- Edit and delete, and title -->
-      <div class="relative w-full h-full">
+      <div class="relative w-full h-1/5">
         <div class="flex flex-row justify-center absolute top-1 left-2">
           <button class="text-green-500 mx-3" @click="triggerEditEvent()">
             <EditIcon class="h-6 w-6" />
@@ -60,31 +60,35 @@
         <p class="h-1/6 w-full text-center text-xl font-bold text-purple-900">{{ event.title }}</p>
       </div>
 
-      <div class="flex flex-row w-full h-5/6 justify-around items-center">
+      <div class="flex flex-row w-full h-4/5 justify-around items-center">
         <!-- Left Panel -->
-        <div class="flex flex-col justify-around w-2/5 h-full text-md font-bold text-violet-900">
-          <div class="flex flex-row items-center">
+        <div class="flex flex-col justify-around w-2/5 h-full">
+          <div class="flex flex-row items-center h-2/6">
             <DateIcon class="h-7 w-7 ml-1.5 mr-2" />
-            <div class="flex flex-col justify-center items-center w-full text-center">
+            <div
+              class="flex flex-col justify-center items-center w-full text-center text-sm font-semibold text-emerald-500"
+            >
               <p class="">{{ event.date.day }}</p>
               <p class="">{{ event.date.time }}</p>
             </div>
           </div>
 
-          <div class="flex flex-row items-center">
+          <div class="flex flex-row items-center h-2/6">
             <PlaceIcon class="h-7 w-6 ml-3 mr-2" />
-            <p class="w-full text-center">{{ event.place }}</p>
+            <p class="w-full text-center text-sky-500 font-semibold">{{ event.place }}</p>
           </div>
 
-          <div class="flex flex-row items-center">
+          <div class="flex flex-row items-center h-2/6">
             <UserIcon class="h-8 w-8 ml-2.5 mr-2" />
-            <p class="w-full text-center">{{ event.author }}</p>
+            <p class="w-full text-center text-orange-600 font-semibold">{{ event.author }}</p>
           </div>
         </div>
 
         <!-- Right Panel -->
         <div class="flex flex-col justify-around items-center w-3/5 h-full px-1 py-2">
-          <p class="text-center italic text-sm font-medium h-3/5">{{ event.description }}</p>
+          <p class="text-center italic text-sm font-medium h-3/5 break-all overflow-y-auto">
+            {{ event.description }}
+          </p>
           <div class="flex flex-col items-center w-full">
             <p class="text-md font-bold">Links</p>
             <div class="flex flex-row w-full h-fit justify-around">
