@@ -4,8 +4,35 @@
       <div class="absolute z-2 border-teal-700 bg-teal-400/95 container"></div>
     </Transition>
 
+    <!-- Confirmation name change -->
+    <div
+      v-if="triggerAlertChangeName"
+      class="absolute flex flex-col justify-start h-36 w-4/6 p-2 overflow-hidden"
+    >
+      <p class="text-red-600 font-semibold max-[390px]:text-sm max-[340px]:text-xs break-keep">
+        Changing your name will change your login name too !
+      </p>
+
+      <div class="flex flex-row justify-between items-center">
+        <div class="flex flex-col justify-center items-center">
+          <p class="text-slate-50 text-center">New login name :</p>
+          <p class="text-orange-500 font-semibold max-[355px]:text-base text-xl">
+            {{ userData.residentName }}
+          </p>
+        </div>
+        <div class="flex flex-col items-center justify-around px-3">
+          <p class="font-semibold text-center text-lg">Confirm ?</p>
+          <div class="flex flex-row justify-center items-center">
+            <p class="text-3xl text-green-700 mx-4" @click.stop="changeName()">✓</p>
+            <p class="text-3xl text-red-600 mx-4" @click.stop="cancelChangeName()">✖</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <Transition type="animation" name="textTrigger" appear>
       <div
+        v-if="!triggerAlertChangeName"
         class="relative z-3 flex flex-col items-start justify-around px-5 w-5/6 h-full text-slate-50"
       >
         <div class="flex flex-row justify-between items-center w-full">
@@ -15,46 +42,58 @@
           </p>
         </div>
 
-        <div class="flex flex-row justify-start items-center max-[380px]:text-sm">
+        <div class="flex flex-row justify-start items-center w-full max-[380px]:text-sm">
           <p class="text-emerald-800 font-bold mr-3">Name :</p>
-          <p v-if="!triggerNameChange" class="">
-            {{ userData.residentName }}
-          </p>
-          <input
-            v-else
-            type="text"
-            maxlength="10"
-            class="w-2/5 pl-2 py-0.5 text-black border-2 border-blue-500 rounded-lg"
-            v-model="userData.residentName"
-            @focusout.stop="changeName()"
-            @keypress.enter="changeName()"
-          />
-          <EditIcon
-            v-if="!triggerNameChange"
-            class="h-4 mx-1 opacity-60"
-            @click.stop="triggerNameChange = true"
-          />
+          <div v-if="!triggerNameChange" class="flex flex-row justify-start items-center">
+            <p class="">
+              {{ userData.residentName }}
+            </p>
+            <EditIcon class="h-4 mx-1 opacity-60" @click.stop="triggerNameChange = true" />
+          </div>
+
+          <div v-else class="flex flex-row justify-start items-center w-3/5">
+            <input
+              type="text"
+              maxlength="10"
+              class="w-full pl-2 py-0.5 text-black border-2 border-blue-500 rounded-lg"
+              v-model="userData.residentName"
+              @keypress.enter="triggerAlertChangeName = true"
+            />
+
+            <div
+              class="relative p-3 border-2 border-green-500 rounded-full text-green-700 bg-green-50"
+              @click.stop="triggerAlertChangeName = true"
+            >
+              <p class="absolute text-center text-base top-0.5 left-1.5">✓</p>
+            </div>
+          </div>
         </div>
 
-        <div class="flex flex-row justify-start items-center max-[380px]:text-sm">
+        <div class="flex flex-row justify-start items-center w-full max-[380px]:text-sm">
           <p class="text-emerald-800 font-bold mr-3">JP name :</p>
-          <p v-if="!triggerKanjiChange" class="">
-            {{ userData.residentNameKanji }}
-          </p>
-          <input
-            v-else
-            type="text"
-            maxlength="8"
-            class="w-2/5 pl-2 py-0.5 text-black border-2 border-blue-500 rounded-lg"
-            v-model="userData.residentNameKanji"
-            @focusout.stop="changeName()"
-            @keypress.enter="changeName()"
-          />
-          <EditIcon
-            v-if="!triggerKanjiChange"
-            class="h-4 mx-1 opacity-60"
-            @click.stop="triggerKanjiChange = true"
-          />
+          <div v-if="!triggerKanjiChange" class="flex flex-row justify-start items-center">
+            <p class="">
+              {{ userData.residentNameKanji }}
+            </p>
+            <EditIcon class="h-4 mx-1 opacity-60" @click.stop="triggerKanjiChange = true" />
+          </div>
+
+          <div v-else class="flex flex-row justify-start items-center w-3/5">
+            <input
+              type="text"
+              maxlength="8"
+              class="w-full pl-2 py-0.5 text-black border-2 border-blue-500 rounded-lg"
+              v-model="userData.residentNameKanji"
+              @keypress.enter="changeNameKanji()"
+            />
+
+            <div
+              class="relative p-3 border-2 border-green-500 rounded-full text-green-700 bg-green-50"
+              @click.stop="changeNameKanji()"
+            >
+              <p class="absolute text-center text-base top-0.5 left-1.5">✓</p>
+            </div>
+          </div>
         </div>
 
         <div class="flex flex-row justify-start items-center">
@@ -79,23 +118,38 @@ export default {
   name: 'ProfileOverlay',
   data() {
     return {
+      triggerAlertChangeName: false,
       triggerNameChange: false,
       triggerKanjiChange: false,
       animText: '',
-      animBox: ''
+      animBox: '',
+      nameBeforeChange: ''
     }
   },
   components: {
     EditIcon
   },
+  mounted() {
+    this.nameBeforeChange = this.userData.residentName
+  },
   methods: {
+    cancelChangeName() {
+      this.triggerAlertChangeName = false
+      this.userData.residentName = this.nameBeforeChange
+    },
     changeName() {
       this.changeUserData()
       this.listRooms[this.userData.roomNumber.replace('-', '')].residentName =
         this.userData.residentName
+      this.triggerNameChange = false
+      this.triggerAlertChangeName = false
+      this.nameBeforeChange = this.userData.residentName
+    },
+    changeNameKanji() {
+      this.changeUserData()
+
       this.listRooms[this.userData.roomNumber.replace('-', '')].residentNameKanji =
         this.userData.residentNameKanji
-      this.triggerNameChange = false
       this.triggerKanjiChange = false
     },
     ...mapActions(useAuthenticationStore, ['changeUserData'])

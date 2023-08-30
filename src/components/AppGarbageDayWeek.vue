@@ -39,7 +39,7 @@
           class="font-montserrat capitalize italic font-bold text-center text-xl text-sky-900"
           :class="{ 'text-red-950': today === 0 }"
         >
-          Team change !
+          TEAM CHANGE !
         </p>
       </div>
     </div>

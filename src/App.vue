@@ -218,7 +218,7 @@ export default {
   methods: {
     ...mapActions(useAuthenticationStore, ['getUserData', 'logOut']),
     loggingUserOut() {
-      this.logoutBtnMsg = `See ya' !`
+      this.logoutBtnMsg = `Bye !`
       setTimeout(() => {
         this.userTabTrigger = false
         this.logOut()
