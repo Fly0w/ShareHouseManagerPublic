@@ -86,7 +86,7 @@
 
         <!-- Right Panel -->
         <div class="flex flex-col justify-around items-center w-3/5 h-full px-1 py-2">
-          <p class="text-center italic text-sm font-medium h-3/5 break-all overflow-y-auto">
+          <p class="text-center italic text-sm font-medium h-3/5 break-word overflow-y-auto">
             {{ event.description }}
           </p>
           <div class="flex flex-col items-center w-full">

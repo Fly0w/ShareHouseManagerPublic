@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 import { auth, db } from '../includes/firebase'
 
@@ -35,6 +35,20 @@ export default defineStore('authentication', {
           return false
         }
       } else {
+        return false
+      }
+    },
+    async changeUserData() {
+      // Update a user collection for the connected user's room
+      try {
+        const docRef = doc(db, 'users', this.userData.roomNumber.replace('-', ''))
+        await updateDoc(docRef, {
+          residentName: this.userData.residentName,
+          residentNameKanji: this.userData.residentNameKanji
+        })
+        return true
+      } catch (error) {
+        console.log(error)
         return false
       }
     },
@@ -81,6 +95,7 @@ export default defineStore('authentication', {
       }
     },
     async logOut() {
+      // Call firebase to logout the user
       try {
         signOut(auth)
         this.isConnected = false

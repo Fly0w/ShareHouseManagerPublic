@@ -1,5 +1,5 @@
 <template>
-  <div class="absolute flex flex-col justify-start h-36 w-full p-3 overflow-hidden">
+  <div class="absolute flex flex-col justify-start h-36 w-full p-2 overflow-hidden">
     <Transition type="animation" name="bgTrigger" appear>
       <div class="absolute z-2 border-teal-700 bg-teal-400/95 container"></div>
     </Transition>
@@ -10,26 +10,58 @@
       >
         <div class="flex flex-row justify-between items-center w-full">
           <p class="text-center text-2xl tracking-wider font-bold">Profile</p>
-          <p class="text-center text-lg font-bold text-emerald-800">{{ roomNumber }}</p>
+          <p class="text-center text-lg max-[350px]:text-base font-bold text-emerald-800">
+            {{ userData.roomNumber }}
+          </p>
         </div>
 
-        <div class="flex flex-row justify-center items-center">
-          <p class="">
-            <span class="text-emerald-800 font-bold mr-3">Name :</span>{{ residentName }}
+        <div class="flex flex-row justify-start items-center max-[380px]:text-sm">
+          <p class="text-emerald-800 font-bold mr-3">Name :</p>
+          <p v-if="!triggerNameChange" class="">
+            {{ userData.residentName }}
           </p>
-          <EditIcon class="h-4 mx-3 opacity-60" />
+          <input
+            v-else
+            type="text"
+            maxlength="10"
+            class="w-2/5 pl-2 py-0.5 text-black border-2 border-blue-500 rounded-lg"
+            v-model="userData.residentName"
+            @focusout.stop="changeName()"
+            @keypress.enter="changeName()"
+          />
+          <EditIcon
+            v-if="!triggerNameChange"
+            class="h-4 mx-1 opacity-60"
+            @click.stop="triggerNameChange = true"
+          />
         </div>
-        <div class="flex flex-row justify-center items-center">
-          <p class="">
-            <span class="text-emerald-800 font-bold mr-3">JP name :</span>{{ residentNameKanji }}
+
+        <div class="flex flex-row justify-start items-center max-[380px]:text-sm">
+          <p class="text-emerald-800 font-bold mr-3">JP name :</p>
+          <p v-if="!triggerKanjiChange" class="">
+            {{ userData.residentNameKanji }}
           </p>
-          <EditIcon class="h-4 mx-3 opacity-60" />
+          <input
+            v-else
+            type="text"
+            maxlength="8"
+            class="w-2/5 pl-2 py-0.5 text-black border-2 border-blue-500 rounded-lg"
+            v-model="userData.residentNameKanji"
+            @focusout.stop="changeName()"
+            @keypress.enter="changeName()"
+          />
+          <EditIcon
+            v-if="!triggerKanjiChange"
+            class="h-4 mx-1 opacity-60"
+            @click.stop="triggerKanjiChange = true"
+          />
         </div>
-        <div class="flex flex-row justify-center items-center">
+
+        <div class="flex flex-row justify-start items-center">
+          <p class="text-emerald-800 font-bold mr-3 max-[380px]:text-sm">Emoji :</p>
           <p class="">
-            <span class="text-emerald-800 font-bold mr-3">Emoji :</span>{{ roomEmoji }}
+            {{ userData.roomEmoji }}
           </p>
-          <EditIcon class="h-4 mx-3 opacity-60" />
         </div>
       </div>
     </Transition>
@@ -38,11 +70,17 @@
 
 <script>
 import EditIcon from './icons/events/EditIcon.vue'
+import useAuthenticationStore from '@/stores/authentication'
+import useRoomsStore from '@/stores/rooms'
+
+import { mapWritableState, mapActions } from 'pinia'
 
 export default {
   name: 'ProfileOverlay',
   data() {
     return {
+      triggerNameChange: false,
+      triggerKanjiChange: false,
       animText: '',
       animBox: ''
     }
@@ -50,7 +88,22 @@ export default {
   components: {
     EditIcon
   },
-  props: ['roomNumber', 'residentName', 'residentNameKanji', 'roomEmoji']
+  methods: {
+    changeName() {
+      this.changeUserData()
+      this.listRooms[this.userData.roomNumber.replace('-', '')].residentName =
+        this.userData.residentName
+      this.listRooms[this.userData.roomNumber.replace('-', '')].residentNameKanji =
+        this.userData.residentNameKanji
+      this.triggerNameChange = false
+      this.triggerKanjiChange = false
+    },
+    ...mapActions(useAuthenticationStore, ['changeUserData'])
+  },
+  computed: {
+    ...mapWritableState(useAuthenticationStore, ['userData']),
+    ...mapWritableState(useRoomsStore, ['listRooms'])
+  }
 }
 </script>
 

@@ -1,15 +1,7 @@
 <template>
   <div class="h-screen w-screen font-montserrat">
     <!-- Overlay Profile page -->
-
-    <ProfileOverlay
-      v-if="userTabTrigger"
-      :roomNumber="userData.roomNumber"
-      :residentName="userData.residentName"
-      :residentNameKanji="userData.residentNameKanji"
-      :roomEmoji="userData.roomEmoji"
-    />
-
+    <ProfileOverlay v-if="userTabTrigger" />
     <!-- Header section -->
     <header class="px-2 py-3 h-36 w-full bg-cyan-600">
       <!-- Title -->
@@ -30,7 +22,7 @@
         <!-- User's profile access buttons -->
         <div
           v-if="isConnected && isGoodscreenWidth"
-          class="relative z-5 flex flex-col justify-center items-center w-1/6"
+          class="relative z-5 flex flex-col justify-center items-end w-1/6"
         >
           <p
             class="h-10 w-10 flex flex-col items-center justify-center border-2 border-orange-500 bg-yellow-100/70 rounded-full text-xl mb-1 active:translate-y-1"
@@ -38,10 +30,10 @@
           >
             {{ userData.roomEmoji }}
           </p>
-          <p class="text-white tracking-wider">{{ userData.residentName }}</p>
+          <p class="text-white tracking-wider max-[350px]:text-sm">{{ userData.residentName }}</p>
           <p
             v-if="userTabTrigger"
-            class="absolute -bottom-11 -right-2 px-3 max-[370px]:w-24 min-[370px]:w-28 py-0.5 text-center font-semibold border-2 border-red-400 bg-orange-600 text-slate-100 rounded-full active:translate-y-1"
+            class="absolute -bottom-12 -right-1 px-3 max-[380px]:w-20 min-[380px]:w-24 py-0.5 text-center font-semibold border-2 border-red-400 bg-orange-600 text-slate-100 rounded-full active:translate-y-1 text-sm"
             @click="loggingUserOut()"
           >
             {{ logoutBtnMsg }}
