@@ -22,7 +22,10 @@ export default defineStore('authentication', {
       const docRef = doc(db, 'users', selectedRoom)
       const docSnap = await getDoc(docRef)
 
-      if (docSnap.data().residentName.toLowerCase() === loginResidentName.toLowerCase()) {
+      if (
+        docSnap.data().residentName.toLowerCase() ===
+        loginResidentName.replace(' ', '').toLowerCase()
+      ) {
         try {
           await signInWithEmailAndPassword(auth, docSnap.data().roomEmail, loginRoomPassword)
           console.log('NICEEEEE')
