@@ -24,7 +24,8 @@ export default defineStore('authentication', {
 
       if (
         docSnap.data().residentName.toLowerCase() ===
-        loginResidentName.replace(' ', '').toLowerCase()
+        loginResidentName.replace(/\s+/g, '').toLowerCase()
+        //Replaces all the spaces in the string
       ) {
         try {
           await signInWithEmailAndPassword(auth, docSnap.data().roomEmail, loginRoomPassword)
