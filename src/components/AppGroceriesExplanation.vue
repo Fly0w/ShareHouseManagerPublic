@@ -18,14 +18,6 @@
 <script>
 export default {
   name: 'AppGroceriesExplanation',
-  // methods: {
-  //   isScreenHeightLessThan670() {
-  //     return window.innerHeight < 670
-  //   },
-  //   isScreenHeightGreaterThanOrEqualTo670() {
-  //     return window.innerHeight >= 670
-  //   }
-  // },
   components: {},
   props: { toggle: Function }
 }
