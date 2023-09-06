@@ -36,23 +36,17 @@
         </p>
       </div>
 
-      <ThrowAwayIcon
-        v-if="weekDuo.now.duo1 === roomNumberData || weekDuo.now.duo2 === roomNumberData"
-        class="absolute h-4/6 mx-1 font-bold text-2xl text-red-500 text-center"
-        :class="{
-          ' right-2': houseSelect === 'A house',
-          ' left-2 ': houseSelect === 'B house'
-        }"
-      />
+      <div class="flex flex-row justify-center items-center h-4/6 w-3/12">
+        <ThrowAwayIcon
+          v-if="weekDuo.now.duo1 === roomNumberData || weekDuo.now.duo2 === roomNumberData"
+          class="w-full h-full mx-1 font-bold text-2xl text-red-500 text-center"
+        />
 
-      <GroceriesIcon
-        v-if="monthDuo.now.duo1 === roomNumberData || monthDuo.now.duo2 === roomNumberData"
-        class="absolute right-2 h-4/6 mx-1 font-bold text-2xl text-green-500 text-center"
-        :class="{
-          ' right-2': houseSelect === 'A house',
-          ' left-2 ': houseSelect === 'B house'
-        }"
-      />
+        <GroceriesIcon
+          v-if="monthDuo.now.duo1 === roomNumberData || monthDuo.now.duo2 === roomNumberData"
+          class="w-full h-full mx-1 font-bold text-2xl text-green-500 text-center"
+        />
+      </div>
     </div>
   </div>
 </template>
