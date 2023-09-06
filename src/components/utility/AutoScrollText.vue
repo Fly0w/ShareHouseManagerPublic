@@ -19,7 +19,7 @@ export default {
 }
 .scrolling-text {
   display: inline-block; /* Afficher les éléments en ligne */
-  animation: scroll 10s linear infinite; /* Utiliser une animation CSS pour le défilement */
+  animation: scroll 7s linear infinite; /* Utiliser une animation CSS pour le défilement */
 }
 @keyframes scroll {
   from {
