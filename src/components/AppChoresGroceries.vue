@@ -1,9 +1,9 @@
 <template>
   <!-- TrashBot -->
   <div
-    class="flex flex-row h-28 items-center justify-center mt-4 px-2 bg-slate-50 bg-opacity-50 border-2 border-emerald-500 rounded-xl font-montserrat"
+    class="flex flex-row h-48 items-center justify-center mt-4 px-2 bg-slate-50 bg-opacity-50 border-2 border-emerald-500 rounded-xl font-montserrat"
   >
-    <div class="flex flex-col mr-2">
+    <div class="flex flex-col mr-2 text-right">
       <p class="my-1 text-emerald-700 opacity-60">
         Last month:
         <span class="font-bold">{{ listRooms[monthDuo?.last?.duo1]?.residentName }}</span>

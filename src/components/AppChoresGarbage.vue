@@ -1,10 +1,10 @@
 <template>
   <!-- TrashBot -->
   <div
-    class="flex flex-row h-28 items-center justify-center mt-4 px-2 bg-slate-50 bg-opacity-50 border-2 border-sky-700 rounded-xl font-montserrat"
+    class="flex flex-row h-48 items-center justify-center mt-4 px-2 bg-slate-50 bg-opacity-50 border-2 border-sky-700 rounded-xl font-montserrat"
   >
     <RobotIcon height="70%" />
-    <div class="flex flex-col ml-2">
+    <div class="flex flex-col text-left ml-2">
       <p class="my-1 text-sky-700 opacity-60">
         Last week:
         <span class="font-bold">{{ listRooms[weekDuo?.last?.duo1]?.residentName }}</span>

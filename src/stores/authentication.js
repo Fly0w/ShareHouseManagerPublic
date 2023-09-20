@@ -23,13 +23,12 @@ export default defineStore('authentication', {
       const docSnap = await getDoc(docRef)
 
       if (
-        docSnap.data().residentName.toLowerCase() ===
+        docSnap.data().residentName.replace(/\s+/g, '').toLowerCase() ===
         loginResidentName.replace(/\s+/g, '').toLowerCase()
         //Replaces all the spaces in the string
       ) {
         try {
           await signInWithEmailAndPassword(auth, docSnap.data().roomEmail, loginRoomPassword)
-          console.log('NICEEEEE')
           setTimeout(() => {
             this.isConnected = true
           }, 1500)
