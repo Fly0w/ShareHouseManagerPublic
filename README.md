@@ -22,6 +22,7 @@ npm install
 ### Database
 
 This app is powered by a Firebase Database, and thus the access is restricted to the owner of the website.
+
 **1.** Create your own firebase database, and enable those 2 services : Authentication and Firestore.
 
 **2.** Go in the "src > includes > firebase.js" file, and replace the firebaseConfig with the one provided by firestore service in firebase :
