@@ -10,7 +10,9 @@ Not only the chores, but also differents features such as requesting everyday li
 ### Git repository
 
 **1.** Download and install nodeJS
+
 **2.** Clone the repository in your local computer
+
 **3.** Install the dependencies by using the following command
 
 ```bash
@@ -21,6 +23,7 @@ npm install
 
 This app is powered by a Firebase Database, and thus the access is restricted to the owner of the website.
 **1.** Create your own firebase database, and enable those 2 services : Authentication and Firestore.
+
 **2.** Go in the "src > includes > firebase.js" file, and replace the firebaseConfig with the one provided by firestore service in firebase :
 
 ```javascript
