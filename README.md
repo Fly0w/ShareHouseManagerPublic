@@ -21,11 +21,11 @@ npm install
 
 ### Database
 
-This app is powered by a Firebase Database, and thus the access is restricted to the owner of the website.
+This app is powered by a Firebase Database, and thus the access is restricted to the owner of the website. You need to create your own Firebase Database.
 
-**1.** Create your own firebase database, and enable those 2 services : Authentication and Firestore.
+**1.** Create your own firebase database, and enable those 2 services : **Authentication** and **Firestore**.
 
-**2.** Go in the "src > includes > firebase.js" file, and replace the firebaseConfig with the one provided by firestore service in firebase :
+**2.** Go in the _"src > includes > firebase.js"_ file, and replace the firebaseConfig with the one provided by firestore service in firebase :
 
 ```javascript
 const firebaseConfig = {
@@ -38,7 +38,7 @@ const firebaseConfig = {
 }
 ```
 
-**3.** In the App.Vue file, uncomment the mounted() lifeCycle action
+**3.** In the _App.Vue_ file, uncomment the **mounted()** lifeCycle action
 
 ```javascript
   async mounted() {
@@ -50,7 +50,7 @@ const firebaseConfig = {
 ```
 
 > **Note :**
-> The credentials are located in the App.Vue state, in the variable called "a". Feel free to change those **before uncommenting the mounted() action** if you want to customize your credentials:
+> The credentials are located in the _App.Vue_ state, in the variable called **"a"**. Feel free to change those **before uncommenting the mounted() action** if you want to customize your credentials:
 
 ```javascript
 data() {
@@ -82,11 +82,11 @@ npm run dev
 
 **5.** Open the developper tool and enable the smartphone view, then refresh the page to see the Login Form appear.
 
-**6.** Once this Form appears, try logging in with the credentials given below. If it works, you can comment back the mounted() function in the App.Vue file.
+**6.** Once this Form appears, try logging in with the credentials given below. If it works, you can comment back the **mounted()** function in the App.Vue file.
 
 ## Login
 
-The credentials are located in the App.Vue state, in the variable called "a":
+The credentials are located in the _App.Vue_ state, in the variable called **"a"**:
 
 ```javascript
 data() {
@@ -118,7 +118,7 @@ In the login form, select the right room, then type the resident name and the pa
 
 ### Auto login
 
-The authentication service provided by firebase emits a login token upon logging in. This token has no expiry date, which means that **the user will stay logged in** as long as he/she doesn't click the "logout" button, or reset the browser's data.
+The authentication service provided by firebase emits a login token upon logging in. This token has no expiry date, which means that **the user will stay logged in** as long as he/she doesn't click the _"logout"_ button, or reset the browser's data.
 
 ### Profile Overlay
 
@@ -134,7 +134,7 @@ The rotation for the groceries and garbage are processed automatically by the ap
 ![Image](Media/ShareHouseRobot.gif)
 
 **Garbage days :**
-The chores tab gathers the grocery chore and the garbage chore in one tab. It allows the residents to see the next garbage day, with the different types of garbage to take out. The ribbon is updated automatically, according to the data input in the App.vue file's state "b", more precisely in "daysWeek":
+The chores tab gathers the grocery chore and the garbage chore in one tab. It allows the residents to see the next garbage day, with the different types of garbage to take out. The ribbon is updated automatically, according to the data input in the _App.vue_ file's state **"b"**, more precisely in "daysWeek":
 
 ```javascript
 data() {
@@ -169,7 +169,27 @@ data() {
 
 You can also see the whole week planning on the "Garbage" tab
 
-**Groceries :** The "Groceries" tab allows tenants to make a request for a specific item they would like the duo on duty to buy for the house. The duo just need to check the "Needs" tab and buy all the requested items, before clearing them.
+**Groceries :** The "Groceries" tab allows tenants to make a request for a specific item they would like the duo on duty to buy for the house. The duo just need to check the "Needs" tab and buy all the requested items, before clearing them. The rotation and list of needs are in the _App.vue_ file's state **"c"**
+
+```javascript
+data() {
+    return {
+      c: {
+        rotation: {
+          0: ['A203', 'B202'],
+          1: ['A204', 'B203'],
+          2: ['A205', 'B204'],
+          3: ['A2061', 'A2062'],
+          4: ['A101', 'B101'],
+          5: ['A1021', 'B102'],
+          6: ['A1022', 'B103'],
+          7: ['A201', 'B104'],
+          8: ['A202', 'B201']
+        },
+        needs: []
+      }
+           ...
+```
 
 ![Image](Media/ShareHouseOrdersNeeds.gif)
 
