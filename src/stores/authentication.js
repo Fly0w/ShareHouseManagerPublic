@@ -29,6 +29,7 @@ export default defineStore('authentication', {
       ) {
         try {
           await signInWithEmailAndPassword(auth, docSnap.data().roomEmail, loginRoomPassword)
+          console.log('NICEEEEE')
           setTimeout(() => {
             this.isConnected = true
           }, 1500)

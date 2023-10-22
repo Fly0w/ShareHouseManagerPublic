@@ -1,7 +1,7 @@
 <template>
   <form
     @submit.prevent="createNewEvent"
-    class="h-full w-full flex flex-col justify-start items-center py-3 px-6 text-center overflow-y-auto over"
+    class="h-full w-full flex flex-col justify-start items-center py-3 px-6 text-center overflow-y-auto"
   >
     <!-- Title -->
     <div class="flex flex-col items-center w-full">

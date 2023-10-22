@@ -48,16 +48,16 @@
       class="relative z-5 flex flex-col w-full h-44 px-1 py-1 border-b-2 bg-slate-100/90 border-violet-700"
     >
       <!-- Edit and delete, and title -->
-      <div class="relative w-full h-1/5">
-        <div class="flex flex-row justify-center absolute top-1 left-2">
-          <button class="text-green-500 mx-3" @click="triggerEditEvent()">
+      <div class="flex flex-row justify-startw-full h-1/5">
+        <div class="flex flex-row w-1/5 justify-around">
+          <button class="text-green-500" @click="triggerEditEvent()">
             <EditIcon class="h-6 w-6" />
           </button>
-          <button class="text-red-500 mx-3" @click="triggerConfirm = 'confirm'">
+          <button class="text-red-500" @click="triggerConfirm = 'confirm'">
             <DeleteIcon class="h-6 w-6" />
           </button>
         </div>
-        <p class="h-1/6 w-full text-center text-xl font-bold text-purple-900">{{ event.title }}</p>
+        <p class="h-1/6 w-4/5 text-center text-xl font-bold text-purple-900">{{ event.title }}</p>
       </div>
 
       <div class="flex flex-row w-full h-4/5 justify-around items-center">

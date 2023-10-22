@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { db } from '../includes/firebase'
-import { getDocs, collection } from 'firebase/firestore'
+import { getDocs, collection, doc, updateDoc } from 'firebase/firestore'
 
 export default defineStore('rooms', {
   state: () => ({
@@ -151,6 +151,21 @@ export default defineStore('rooms', {
       }
     }
   }),
+  actions: {
+    async editRoom(roomNumber, newName) {
+      try {
+        const docRef = doc(db, 'users', roomNumber)
+        await updateDoc(docRef, {
+          residentName: newName,
+          residentNameKanji: ''
+        })
+        return true
+      } catch (error) {
+        console.log(error)
+        return false
+      }
+    }
+  },
   getters: {
     async getAllRooms(state) {
       try {

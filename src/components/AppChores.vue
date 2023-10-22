@@ -2,8 +2,7 @@
   <div class="w-full h-full">
     <!-- Garbage next notification -->
     <AutoScrollText
-      class="flex flex-col justify-center w-full mb-3 bg-white bg-opacity-80 text-teal-700 text-center text-lg font-montserrat font-bold"
-      style="height: 9%"
+      class="flex flex-col justify-center h-12 w-full mb-3 bg-white bg-opacity-80 text-teal-700 text-center text-lg font-montserrat font-bold"
     >
       <template v-slot:content>
         <div class="h-full flex flex-row justify-between w-full items-center">
@@ -41,8 +40,7 @@
 
     <!-- Garbage/Groceries Tabs -->
     <div
-      class="flex flex-row mx-5 justify-center text-center text-lg font-montserrat font-bold border-2 border-sky-800 rounded-full"
-      style="height: 7%"
+      class="flex flex-row mx-5 h-11 justify-center text-center text-lg font-montserrat font-bold border-2 border-sky-800 rounded-full"
     >
       <div
         class="flex flex-col justify-center px-8 py-2 w-3/6 rounded-l-full"
@@ -118,3 +116,37 @@ export default {
   }
 }
 </script>
+
+<style>
+@keyframes shake-up {
+  0% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes shake-down {
+  0% {
+    transform: translateY(0px);
+  }
+  60% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.minus {
+  animation: shake-up 4s ease-in-out infinite;
+}
+
+.plus {
+  animation: shake-down 4s ease-in-out infinite;
+}
+</style>

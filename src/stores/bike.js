@@ -37,6 +37,21 @@ export default defineStore('bike', {
         return false
       }
     },
+    async changeBikeLock(newLock) {
+      try {
+        const docUsageState = doc(db, 'bike', 'lockPass')
+
+        await updateDoc(docUsageState, {
+          lockPass: newLock
+        })
+        this.lockPass = newLock
+        console.log('Lock changed successfully')
+        return true
+      } catch (error) {
+        console.log(error)
+        return false
+      }
+    },
     async startUsing(userName) {
       // Envoyer info database 1.update state 2. Ecrire history
       // Updates the state "isBeingUsed" in the db with userName and creates a history entry

@@ -2,13 +2,12 @@
   <div class="w-full h-full font-montserrat">
     <!-- Title -->
     <div
-      class="flex flex-col justify-center w-full py-3 text-center"
+      class="flex flex-col justify-center w-full py-3 text-center h-16"
       :class="{
         'bg-fuchsia-500/95': eventTab === 'list',
         'bg-yellow-500/95': eventTab === 'create',
         'bg-teal-500/95': eventTab === 'edit'
       }"
-      style="height: 10%"
     >
       <h2 v-if="eventTab === 'create'" class="text-white text-3xl italic tracking-widest">
         New Event ?
@@ -17,32 +16,33 @@
         Edit Event ?
       </h2>
       <h2 v-else class="text-white text-3xl italic tracking-widest">Upcoming events</h2>
-
-      <button
-        v-if="eventTab === 'list'"
-        class="absolute z-30 right-3 top-48 flex flex-col justify-center items-center h-12 w-12 border-2 text-4xl font-bolder rounded-full bg-emerald-500 border-emerald-800 text-white"
-        @click.prevent="eventTab = 'create'"
-      >
-        <p class="relative">+</p>
-      </button>
-
-      <button
-        v-else
-        class="absolute z-30 right-3 top-48 flex flex-col justify-center items-center h-12 w-12 border-2 text-4xl font-bolder rounded-full bg-slate-300 border-white text-white"
-        @click.prevent="eventTab = 'list'"
-      >
-        <p class="absolute text-white font-semibold">↶</p>
-      </button>
     </div>
 
-    <div class="w-full" v-if="eventTab === 'create'" style="height: 90%">
+    <div class="flex flex-row justify-center items-center h-14 w-full">
+      <p
+        v-if="eventTab === 'list'"
+        @click.prevent="eventTab = 'create'"
+        class="px-8 py-1 rounded-full border-2 border-slate-200 bg-purple-600 text-slate-100"
+      >
+        Create new event
+      </p>
+      <p
+        v-else
+        @click.prevent="eventTab = 'list'"
+        class="px-8 py-1 rounded-full border-2 border-slate-100 bg-gray-500 text-slate-100"
+      >
+        Cancel
+      </p>
+    </div>
+
+    <div class="w-full" v-if="eventTab === 'create'" style="height: 75%">
       <EventNewForm :toggleTab="toggleTab" />
     </div>
-    <div class="w-full" v-else-if="eventTab === 'edit'" style="height: 90%">
+    <div class="w-full" v-else-if="eventTab === 'edit'" style="height: 75%">
       <EventEditForm :toggleTab="toggleTab" />
     </div>
     <!--List of Events -->
-    <div v-else class="w-full overflow-y-auto" style="height: 90%">
+    <div v-else class="flex flex-col w-full overflow-y-auto" style="height: 75%">
       <div class="w-full" v-for="event in eventList" :key="event.id">
         <EventCard :event="event" :toggleTab="toggleTab" />
       </div>

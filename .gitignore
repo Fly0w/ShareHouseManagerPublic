@@ -26,3 +26,7 @@ coverage
 *.sw?
 
 .env
+.backup
+.vercel
+
+.vercel

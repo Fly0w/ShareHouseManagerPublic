@@ -1,17 +1,16 @@
 <template>
   <!-- Title -->
   <div
-    class="flex flex-col justify-center w-full py-3 text-center bg-teal-400/90 font-montserrat"
-    style="height: 10%"
+    class="flex flex-col justify-center h-16 w-full py-3 text-center bg-teal-400/90 font-montserrat"
   >
     <h2 class="text-white text-3xl italic tracking-widest">Rooms</h2>
   </div>
 
-  <div class="w-full" style="height: 90%">
+  <div class="w-full" style="height: calc(100% - 4rem)">
     <!-- House Tabs -->
     <div class="pt-3 mb-5 flex flex-row justify-around font-montserrat font-semibold">
       <div
-        class="px-8 py-2 border-4 rounded-full"
+        class="px-8 py-2 border-4 rounded-full text-center"
         @click="houseSelect = 'A house'"
         :class="{
           'bg-teal-500 border-emerald-400 text-slate-50': houseSelect === 'A house',
@@ -21,7 +20,7 @@
         A House
       </div>
       <div
-        class="px-8 py-2 border-4 rounded-full"
+        class="px-8 py-2 border-4 rounded-full text-center"
         @click="houseSelect = 'B house'"
         :class="{
           'bg-purple-600 border-purple-500 text-slate-50': houseSelect === 'B house',
@@ -33,7 +32,7 @@
     </div>
 
     <!-- Room list -->
-    <div class="mx-5 overflow-y-auto rounded-2xl" style="height: 70%">
+    <div class="mx-5 overflow-y-auto rounded-2xl" style="height: 80%">
       <div v-if="houseSelect === 'A house'">
         <div v-for="(room, key) in listRooms" :key="room.roomNumber" class="">
           <AppRoom

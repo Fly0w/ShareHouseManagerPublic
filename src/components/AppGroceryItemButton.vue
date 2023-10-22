@@ -80,7 +80,6 @@ export default {
     ...mapActions(useChoresStore, ['updateNeeds']),
     AddNeedComponent() {
       //Update the store and call the database function to add the need
-      console.log('click')
       this.triggerConfirm = 'done'
       setTimeout(() => {
         this.groceries.needs.push({
