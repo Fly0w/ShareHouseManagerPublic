@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-start items-center h-full text-center">
+  <div class="flex flex-col justify-center items-center h-full text-center">
     <div class="flex flex-row justify-center items-center mb-10">
       <p class="text-3xl text-slate-800">
         Welcome
@@ -25,7 +25,7 @@
       </div>
       <div class="flex flex-col justify-center items-center mb-3">
         <p class="text-xl text-slate-800">Password :</p>
-        <p class="ml-3 text-3xl font-semibold text-sky-700">{{ accountPassword }}</p>
+        <p class="ml-3 text-3xl font-semibold text-sky-700">testpassword</p>
       </div>
     </div>
     <a href="/">
@@ -55,11 +55,7 @@ export default {
     ...mapActions(useAuthenticationStore, ['getUserData'])
   },
   computed: {
-    ...mapState(useAuthenticationStore, ['userData']),
-    accountPassword() {
-      const pass = (this.userData.roomNumber + 'password').replace('-', '')
-      return pass
-    }
+    ...mapState(useAuthenticationStore, ['userData'])
   },
   props: ['selectedRoom']
 }

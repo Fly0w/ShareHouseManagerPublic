@@ -10,7 +10,7 @@
     </div>
     <div
       v-else-if="view === 'register'"
-      class="flex flex-col justify-start items-center w-full h-5/6 text-center"
+      class="flex flex-col justify-center items-center w-full h-5/6 text-center"
     >
       <p class="text-4xl mb-5 text-white font-bold" style="text-shadow: purple 2px 2px 5px">
         Share House 1

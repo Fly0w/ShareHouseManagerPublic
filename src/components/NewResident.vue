@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-center items-center p-7 h-screen w-screen font-montserrat overflow-y-auto"
+    class="flex flex-col justify-center items-center p-7 h-full w-full font-montserrat overflow-y-auto"
     style="
       background-image: url('/bg-mobile-purple.jpg');
       background-size: cover;

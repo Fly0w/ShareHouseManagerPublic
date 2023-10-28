@@ -42,7 +42,7 @@
       <EventEditForm :toggleTab="toggleTab" />
     </div>
     <!--List of Events -->
-    <div v-else class="flex flex-col w-full overflow-y-auto" style="height: 75%">
+    <div v-else class="flex flex-col w-full h-full overflow-y-auto" style="height: 75%">
       <div class="w-full" v-for="event in eventList" :key="event.id">
         <EventCard :event="event" :toggleTab="toggleTab" />
       </div>

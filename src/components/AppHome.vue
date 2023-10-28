@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-screen font-montserrat">
+  <div class="h-full w-full font-montserrat relative">
     <!-- Overlay Profile page -->
     <ProfileOverlay v-if="userTabTrigger" />
     <!-- Header section -->
@@ -9,8 +9,8 @@
         <div
           class="flex flex-col w-full"
           :class="{
-            'justify-start items-start w-5/6': isConnected && isGoodscreenWidth,
-            'justify-center items-center': !isConnected || !isGoodscreenWidth
+            'justify-start items-start w-5/6': isConnected,
+            'justify-center items-center': !isConnected
           }"
         >
           <h1 class="font-montserrat text-2xl max-[364px]:text-xl font-bold text-slate-100">
@@ -20,10 +20,7 @@
         </div>
 
         <!-- User's profile access buttons -->
-        <div
-          v-if="isConnected && isGoodscreenWidth"
-          class="relative z-5 flex flex-col justify-center items-end w-1/6"
-        >
+        <div v-if="isConnected" class="relative z-5 flex flex-col justify-center items-end w-1/6">
           <div
             class="relative flex flex-col justify-center items-center h-10 w-10 mb-1 rounded-full"
           >
@@ -51,7 +48,7 @@
 
       <!-- Tabs -->
       <div
-        v-if="isConnected && isGoodscreenWidth"
+        v-if="isConnected"
         class="flex flex-row justify-start font-montserrat font-bold mt-2.5 overflow-x-auto"
       >
         <!-- Chores -->
@@ -133,15 +130,15 @@
     <!-- Content section -->
     <div
       style="
-        height: calc(100vh - 9rem);
+        height: calc(100% - 9rem);
         background-image: url('/bg-mobile-blue.jpg');
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
       "
-      class="flex flex-col justify-center items-center overflow-y-auto w-full"
+      class="w-full flex flex-col justify-center items-center overflow-y-auto"
     >
-      <div v-if="isGoodscreenWidth" class="w-full h-full">
+      <div class="w-full h-full">
         <div v-if="!isConnected" class="w-full h-full">
           <LoginForm />
         </div>
@@ -153,14 +150,6 @@
           <AppMoney v-if="tab === 'Money'" />
           <AppNoise v-if="tab === 'Noise'" />
         </div>
-      </div>
-
-      <!-- PC version -->
-      <div v-else class="flex flex-col justify-center items-center h-full w-full p-5">
-        <p class="text-sky-700 text-4xl text-center m-5">
-          This app is meant to be used on a smartphone ...
-        </p>
-        <img src="/smartphone.png" alt="smartphone" class="mt-10" />
       </div>
     </div>
   </div>
@@ -258,14 +247,7 @@ export default {
     ]),
     ...mapWritableState(useRoomsStore, ['getAllRooms']),
     ...mapWritableState(useBikeStore, ['getBikeData', 'setBike']),
-    ...mapWritableState(useEventsStore, ['eventList', 'getEventsData']),
-    isGoodscreenWidth() {
-      if (window.innerWidth <= 550) {
-        return true
-      } else {
-        return false
-      }
-    }
+    ...mapWritableState(useEventsStore, ['eventList', 'getEventsData'])
   }
   // async mounted() {
   //   this.setChores(this.b, this.c)
