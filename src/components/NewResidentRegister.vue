@@ -13,7 +13,7 @@
       class="flex flex-col justify-start items-center w-full h-5/6 text-center"
     >
       <p class="text-4xl mb-5 text-white font-bold" style="text-shadow: purple 2px 2px 5px">
-        Omotesando 1
+        Share House 1
       </p>
       <p class="mb-5 text-2xl text-purple-700">Tell us more about yourself...</p>
 
@@ -91,7 +91,7 @@
       class="flex flex-col justify-start items-center w-full h-4/6 text-center"
     >
       <p class="text-4xl mb-5 text-white font-bold" style="text-shadow: purple 2px 2px 5px">
-        Omotesando 1
+        Share House 1
       </p>
       <p class="mb-8 text-2xl text-purple-700">Please check your information before validation</p>
 

@@ -16,7 +16,7 @@
           <h1 class="font-montserrat text-2xl max-[364px]:text-xl font-bold text-slate-100">
             Share House Manager
           </h1>
-          <h3 class="font-montserrat text-lg text-slate-100">Omotesando 1</h3>
+          <h3 class="font-montserrat text-lg text-slate-100">Share House 1</h3>
         </div>
 
         <!-- User's profile access buttons -->

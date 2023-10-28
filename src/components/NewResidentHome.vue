@@ -5,12 +5,12 @@
         <p class="text-xl text-violet-600 mb-3">
           Welcome to
           <span class="font-semibold text-white" style="text-shadow: purple 1px 1px 10px"
-            >Borderless House</span
-          >
+            >Share House
+          </span>
           !
         </p>
         <p class="text-4xl text-purple-500 font-bold" style="text-shadow: white 2px 2px 5px">
-          Omotesando 1
+          Share house 1
         </p>
       </div>
     </Transition>
