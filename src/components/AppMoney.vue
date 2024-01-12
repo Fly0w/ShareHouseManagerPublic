@@ -1,37 +1,174 @@
 <template>
-  <div class="flex flex-col justify-center items-center h-full w-full">
-    <p class="text-6xl text-center text-sky-700 tracking-widest mb-10">Coming soon !</p>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
-      style="background: none; display: block; shape-rendering: auto"
-      width="200px"
-      height="200px"
-      viewBox="0 0 100 100"
-      preserveAspectRatio="xMidYMid"
-    >
-      <g transform="translate(50 50)">
-        <g>
-          <animateTransform
-            attributeName="transform"
-            type="rotate"
-            values="0;51.42857142857143"
-            keyTimes="0;1"
-            dur="0.4854368932038836s"
-            repeatCount="indefinite"
-          ></animateTransform>
-          <path
-            d="M29.17190429162964 -7 L40.171904291629644 -7 L40.171904291629644 7 L29.17190429162964 7 A30 30 0 0 1 23.661205203906313 18.44308456572915 L23.661205203906313 18.44308456572915 L30.519593024352382 27.04323087287748 L19.573952269799967 35.77208809889975 L12.715564449353897 27.171941791751422 A30 30 0 0 1 0.33313599701512264 29.998150283100667 L0.33313599701512264 29.998150283100667 L-2.114594276504336 40.72235731710073 L-15.763585047049872 37.60706424171232 L-13.315854773530415 26.882857207712267 A30 30 0 0 1 -23.24579141036437 18.96399698654875 L-23.24579141036437 18.96399698654875 L-33.156448957290976 23.73671811684189 L-39.230821304936796 11.123153966208012 L-29.32016375801019 6.350432835914873 A30 30 0 0 1 -29.32016375801019 -6.350432835914866 L-29.32016375801019 -6.350432835914866 L-39.230821304936796 -11.123153966208005 L-33.15644895729098 -23.73671811684188 L-23.245791410364372 -18.963996986548743 A30 30 0 0 1 -13.31585477353042 -26.882857207712263 L-13.31585477353042 -26.882857207712263 L-15.76358504704988 -37.60706424171232 L-2.1145942765043384 -40.72235731710073 L0.3331359970151219 -29.998150283100667 A30 30 0 0 1 12.715564449353884 -27.171941791751422 L12.715564449353884 -27.171941791751422 L19.573952269799953 -35.77208809889975 L30.519593024352382 -27.04323087287748 L23.661205203906313 -18.44308456572915 A30 30 0 0 1 29.171904291629637 -7.000000000000013 M0 -17A17 17 0 1 0 0 17 A17 17 0 1 0 0 -17"
-            fill="#1d3f72"
-          ></path>
-        </g>
-      </g>
-    </svg>
+  <!-- Title -->
+  <div
+    class="flex flex-col justify-center h-16 w-full py-3 text-center bg-sky-400/90 font-montserrat"
+  >
+    <h2 class="text-white text-3xl italic tracking-widest">Common fee</h2>
+  </div>
+
+  <div class="flex flex-col justify-center items-center h-20 w-full bg-sky-50/50 mb-5">
+    <div class="flex flex-row justify-center items-center h-16 w-11/12">
+      <div class="flex flex-col justify-start items-center w-16 h-16">
+        <CoinIcon />
+        <p class="text-sm font-semibold text-orange-600">500 ¥</p>
+      </div>
+      <div class="flex flex-row justify-around items-center w-10/12 h-5/6">
+        <div class="animleft" @click="substractOneMonth"><LeftArrow class="w-10 h-10" /></div>
+        <div class="text-lg min-[370px]:text-xl font-semibold text-teal-800">
+          {{ months[monthCounter] }} {{ year }}
+        </div>
+        <div class="animright" @click="addOneMonth"><RightArrow class="w-10 h-10" /></div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="flex flex-col justify-start items-start px-3 w-full overflow-y-auto"
+    style="height: 70%"
+  >
+    <div v-for="(room, key) in listRooms" :key="room.roomNumber" class="w-full">
+      <AppMoneyCard
+        :roomNumberText="room.roomNumber"
+        :roomNumberKey="key"
+        :roomEmoji="room.roomEmoji"
+        :residentName="room.residentName"
+        :paymentStatus="currentMonthData[key].paid"
+        :namePaid="currentMonthData[key].name"
+        :datePaid="currentMonthData[key].date"
+        :monthYearString="months[monthCounter].concat(year.toString())"
+        :month="months[monthCounter]"
+      />
+    </div>
   </div>
 </template>
 
 <script>
+import moment from 'moment/moment'
+
+import AppMoneyCard from './AppMoneyCard.vue'
+import CoinIcon from './icons/CoinIcon.vue'
+import LeftArrow from './icons/LeftArrow.vue'
+import RightArrow from './icons/RightArrow.vue'
+
+import useRoomsStore from '@/stores/rooms'
+import useMoneyStore from '@/stores/money'
+import { mapState, mapActions } from 'pinia'
+
 export default {
-  name: 'AppMoney'
+  name: 'AppMoney',
+  data() {
+    return {
+      monthCounter: parseInt(moment().format('M')) - 1,
+      year: parseInt(moment().format('YYYY')),
+      months: {
+        0: 'January',
+        1: 'February',
+        2: 'March',
+        3: 'April',
+        4: 'May',
+        5: 'June',
+        6: 'July',
+        7: 'August',
+        8: 'September',
+        9: 'October',
+        10: 'November',
+        11: 'December'
+      }
+    }
+  },
+  methods: {
+    ...mapActions(useMoneyStore, ['createNewMonth', 'getMoneyData']),
+    async getData() {
+      //get the data from the database for a given year and month
+      let monthYearString = this.months[this.monthCounter].concat(this.year.toString())
+      console.log(monthYearString)
+      await this.createNewMonth(monthYearString)
+      await this.getMoneyData(monthYearString)
+      console.log('getting data for', monthYearString)
+    },
+    addOneMonth() {
+      // Add 1 to the month conter, and makes sure the counter does not go over 11, otherwise add +1 year
+      if (this.monthCounter > 11 || this.monthCounter < 0) {
+        return 'error'
+      } else {
+        if (this.monthCounter === 11) {
+          this.monthCounter = 0
+          this.year++
+        } else {
+          this.monthCounter++
+        }
+        this.getData()
+      }
+    },
+    substractOneMonth() {
+      // Substract 1 to the month conter, and makes sure the counter does not go below 0, otherwise substract 1 year
+      if (this.monthCounter > 11 || this.monthCounter < 0) {
+        return 'error'
+      } else {
+        if (this.monthCounter === 0) {
+          this.monthCounter = 11
+          this.year--
+        } else {
+          this.monthCounter--
+        }
+        this.getData()
+      }
+    },
+    getPaymentStatus(room) {
+      this.currentMonthData[room.roomNumber] ? this.currentMonthData[room.roomNumber].paid : false // ou une valeur par défaut appropriée
+    },
+    getNamePaid(room) {
+      this.currentMonthData[room.roomNumber] ? this.currentMonthData[room.roomNumber].name : '' // ou une valeur par défaut appropriée
+    },
+    getDatePaid(room) {
+      this.currentMonthData[room.roomNumber] ? this.currentMonthData[room.roomNumber].date : '' // ou une valeur par défaut appropriée
+    }
+  },
+  computed: {
+    ...mapState(useRoomsStore, ['listRooms']),
+    ...mapState(useMoneyStore, ['currentMonthData'])
+  },
+  components: {
+    AppMoneyCard,
+    CoinIcon,
+    LeftArrow,
+    RightArrow
+  },
+  created() {
+    this.getData()
+  }
 }
 </script>
+<style>
+@keyframes shake-left {
+  0% {
+    transform: translateX(0px);
+  }
+  60% {
+    transform: translateX(-2px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes shake-right {
+  0% {
+    transform: translateX(0px);
+  }
+  60% {
+    transform: translateX(2px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.animleft {
+  animation: shake-left 2s ease-in-out infinite;
+}
+
+.animright {
+  animation: shake-right 2s ease-in-out infinite;
+}
+</style>
